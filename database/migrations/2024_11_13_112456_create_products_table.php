@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->string('product_id',10)->primary();
-            $table->string('producttype_id')->nullable();
+            $table->string('producttype_id');
+            $table->foreign('producttype_id')->references('producttype_id')->on('product_type')->onDelete('cascade');
             $table->string('product_name');
             $table->string('product_desc')->nullable();
             $table->string('product_desc0')->nullable();

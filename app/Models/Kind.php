@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-class Group extends Model
+
+class Kind extends Model
 {
     use HasFactory;
-    protected $table = 'group';
+    protected $table = 'kind';
     protected $guarded = [];
-
-    protected $primaryKey = 'group_id';
+    protected $primaryKey = 'kind_id';
     public $incrementing = false;
     protected $keyType = 'string';
-
-
 }

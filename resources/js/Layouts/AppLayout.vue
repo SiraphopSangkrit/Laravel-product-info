@@ -1,6 +1,7 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Footer from '@/Components/Footer.vue';
+import { Link } from '@inertiajs/vue3';
 
 </script>
 <template>
@@ -8,7 +9,9 @@ import Footer from '@/Components/Footer.vue';
         <div class="min-h-screen bg-white">
             <div class="min-w-full bg-gray-100">
                 <div class="flex justify-end mx-auto px-6 sm:px-8 lg:px-10 text-black">
-                    admin login
+                    <Link :href="route('admin.dashboard')">
+                        admin login
+                    </Link>
                 </div>
 
             </div>
