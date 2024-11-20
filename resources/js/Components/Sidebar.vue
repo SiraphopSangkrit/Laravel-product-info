@@ -68,14 +68,13 @@ import { Link } from '@inertiajs/vue3';
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul class="space-y-2 text-base">
                 <li>
-                    <Link :href="route('admin.dashboard')"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-
+                    <Link :href="route('admin.dashboard')"  :class="{ 'active bg-gray-200 ' : $page.url === '/admin'}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ">
                     <span class="ms-3">แดชบอร์ด</span>
                     </Link>
                 </li>
                 <li>
-                    <Link
+                    <Link :href="route('admin.banner')"  :class="{ 'active bg-gray-200 ' :$page.url === '/admin/banner'}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">แบนเนอร์</span>
@@ -83,35 +82,41 @@ import { Link } from '@inertiajs/vue3';
                     </Link>
                 </li>
                 <li>
-                    <Link
+                    <Link :href="route('admin.news')"  :class="{ 'active bg-gray-200 ' :$page.url === '/admin/news'}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">ข่าว</span>
                     </Link>
                 </li>
                 <li>
-                    <Link :href="route('admin.productTypes')"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-
-                    <span class="flex-1 ms-3 whitespace-nowrap">ประเภทสินค้า</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link :href="route('admin.products')"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <Link :href="route('admin.products')"  :class="{ 'active bg-gray-200 ' :$page.url === '/admin/products'}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">สินค้า</span>
-                    </Link>
-                </li>
+                </Link>
+            </li>
+            <li>
+                <Link :href="route('admin.productBrands')" :class="{ 'active bg-gray-200 ' :$page.url === '/admin/productBrands'}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <span class="flex-1 ms-3 whitespace-nowrap">แบรนด์สินค้า</span>
+                </Link>
+            </li>
+            <li>
+                <Link :href="route('admin.productTypes')" :class="{ 'active bg-gray-200 ' :$page.url === '/admin/productTypes'}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                <span class="flex-1 ms-3 whitespace-nowrap">ประเภทสินค้า</span>
+                </Link>
+            </li>
                 <li>
-                    <Link :href="route('admin.productGroups')"
+                    <Link :href="route('admin.productGroups')" :class="{ 'active bg-gray-200 ' :$page.url === '/admin/productGroups'}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">กลุ่มสินค้า</span>
                     </Link>
                 </li>
                 <li>
-                    <Link :href="route('admin.productKinds')"
+                    <Link :href="route('admin.productKinds')" :class="{ 'active bg-gray-200 ' :$page.url === '/admin/productKinds'}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">ชนิดสินค้า</span>

@@ -1,9 +1,10 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Head } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import { ref } from 'vue';
 import Modal from '@/Components/Modal.vue';
+import { Head } from '@inertiajs/vue3';
+
 
 const CreateModal = ref(false);
 
@@ -14,15 +15,19 @@ const openCreateModal = () => {
 const handleClose = () => {
     CreateModal.value = false;
 };
-const props = defineProps(['productKinds'])
+
+
+
+const props = defineProps(['productBrands'])
 
 </script>
 <template>
 <AdminLayout>
-    <Head title="Kinds" />
+    <Head title="Brands" />
+
         <div>
             <button type="button" @click="openCreateModal"
-                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">เพิ่มชนิดสินค้า</button>
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">เพิ่มกลุ่มสินค้า</button>
         </div>
 
         <form class="w-1/3 my-5">
@@ -48,10 +53,10 @@ const props = defineProps(['productKinds'])
                 <thead class=" text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            รหัสชนิดสินค้า
+                            รหัสกลุ่มสินค้า
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            ชื่อชนิดสินค้า
+                            ชื่อกลุ่มสินค้า
                         </th>
 
                         <th scope="col" class="px-6 py-3">
@@ -61,12 +66,12 @@ const props = defineProps(['productKinds'])
                 </thead>
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                        v-for="kind in productKinds.data" :key="kind.kind_id">
+                        v-for="brand in productBrands.data" :key="brand.brand_id">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ kind.kind_id }}
+                            {{ brand.brand_id }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ kind.kind_name }}
+                            {{ brand.brand_name }}
                         </td>
                         <td class="px-6 py-4 text-right">
 
@@ -76,7 +81,7 @@ const props = defineProps(['productKinds'])
 
                             <button
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                >ลบชนิดสินค้า</button>
+                                >ลบแบรนด์สินค้า</button>
                         </td>
                     </tr>
 
@@ -84,7 +89,7 @@ const props = defineProps(['productKinds'])
             </table>
         </div>
         <div class="flex justify-end">
-            <pagination :elements="props.productKinds"></pagination>
+            <pagination :elements="props.productBrands"></pagination>
         </div>
 
         <Modal :show="CreateModal" @close="handleClose" maxWidth="6xl" closeable>
@@ -106,14 +111,14 @@ const props = defineProps(['productKinds'])
 
                         <div>
                             <label for="product"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสชนิดสินค้า</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสแบรนด์สินค้า</label>
                             <input type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Product Name" required />
                         </div>
                         <div class="w-full mx-2">
                             <label for="product"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อชนิดสินค้า</label>
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อแบรนด์สินค้า</label>
                             <input type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Product Name" required />

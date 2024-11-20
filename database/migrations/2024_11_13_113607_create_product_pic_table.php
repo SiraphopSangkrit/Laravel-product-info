@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('product_pic', function (Blueprint $table) {
-            $table->id('ProductPic');
+            $table->id('ProductPic_id');
             $table->string('product_id');
             $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
-            $table->bigInteger('picture_id')->unsigned();
-            $table->foreign('picture_id')->references('picture_id')->on('pictures')->onDelete('cascade');
+            $table->string('asset_url')->nullable();
+            $table->string('public_url')->nullable();
             $table->timestamps();
         });
     }

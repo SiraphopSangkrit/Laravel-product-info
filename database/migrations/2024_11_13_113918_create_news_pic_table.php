@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('newsPic_id');
             $table->bigInteger('banner_id')->unsigned();
             $table->foreign('banner_id')->references('banner_id')->on('banner')->onDelete('cascade');
-            $table->bigInteger('picture_id')->unsigned();
-            $table->foreign('picture_id')->references('picture_id')->on('pictures')->onDelete('cascade');
+            $table->string('asset_url')->nullable();
+            $table->string('public_url')->nullable();
             $table->timestamps();
         });
     }

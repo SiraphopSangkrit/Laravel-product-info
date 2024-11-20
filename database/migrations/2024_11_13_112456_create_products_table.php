@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('producttype_id');
             $table->foreign('producttype_id')->references('producttype_id')->on('product_type')->onDelete('cascade');
             $table->string('product_name');
-            $table->string('product_desc')->nullable();
-            $table->string('product_desc0')->nullable();
-            $table->string('product_desc1')->nullable();
+            $table->text('product_desc')->nullable();
+            $table->text('product_desc0')->nullable();
+            $table->text('product_desc1')->nullable();
             $table->string('brand_id');
             $table->foreign('brand_id')->references('brand_id')->on('brand')->onDelete('cascade');
             $table->string('group_id');
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 };

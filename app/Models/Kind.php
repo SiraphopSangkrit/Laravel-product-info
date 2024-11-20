@@ -13,4 +13,9 @@ class Kind extends Model
     protected $primaryKey = 'kind_id';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function products()
+    {
+        return $this->hasMany(Products::class);
+    }
 }
