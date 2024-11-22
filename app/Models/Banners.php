@@ -11,7 +11,5 @@ class Banners extends Model
     protected $guarded = [];
     protected $primaryKey = 'banner_id';
 
-    public function bannerPics(){
-        return $this->hasMany(bannerPics::class,'banner_id');
-    }
+  
 }

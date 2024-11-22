@@ -27,7 +27,7 @@ const props = defineProps(['productBrands'])
 
         <div>
             <button type="button" @click="openCreateModal"
-                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">เพิ่มกลุ่มสินค้า</button>
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">เพิ่มแบรนด์สินค้า</button>
         </div>
 
         <form class="w-1/3 my-5">
@@ -53,10 +53,10 @@ const props = defineProps(['productBrands'])
                 <thead class=" text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            รหัสกลุ่มสินค้า
+                            รหัสแบรนด์สินค้า
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            ชื่อกลุ่มสินค้า
+                            ชื่อแบรนด์สินค้า
                         </th>
 
                         <th scope="col" class="px-6 py-3">

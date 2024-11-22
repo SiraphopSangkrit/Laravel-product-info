@@ -19,6 +19,12 @@ const FilePond = vueFilePond(
     FilePondPluginImagePreview
 );
 
+const props = defineProps(['banners'])
+
+
+const form = useForm({
+    image: []
+});
 
 const CreateModal = ref(false);
 
@@ -31,7 +37,24 @@ const handleClose = () => {
 };
 
 
-
+const BannerCreate = () => {
+    form.post(route('admin.banner.create'), {
+        onSuccess: () => {
+            handleClose();
+            Toast.fire({
+                icon: "success",
+                title: "เพิ่มแบนเนอร์สำเร็จ"
+            });
+        },
+        onError: () => {
+            handleClose();
+            Toast.fire({
+                icon: "error",
+                title: "เพิ่มแบนเนอร์ไม่สำเร็จ"
+            });
+        }
+    });
+}
 
 const Toast = Swal.mixin({
     toast: true,
@@ -44,6 +67,32 @@ const Toast = Swal.mixin({
         toast.onmouseleave = Swal.resumeTimer;
     }
 });
+
+const toggleBannerStatus = (banner) => {
+
+const newStatus = !banner.banner_status;
+
+try {
+
+    router.put(route('admin.toggleBannerStatus', banner.banner_id), {
+        status: newStatus,
+
+    });
+
+    banner.banner_status = newStatus;
+
+    Toast.fire({
+        icon: "success",
+        title: "อัพเดตสเตตัสสำเร็จ"
+    });
+} catch (error) {
+    console.error('Failed to update status:', error);
+    Toast.fire({
+        icon: "error",
+        title: "อัพเดตสเตตัสไม่สำเร็จ"
+    });
+}
+};
 
 const handleFilePondInit = () => {
 
@@ -64,7 +113,7 @@ const handleFilePondInit = () => {
                 <thead class=" text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            รหัสแบนเนอร์
+                            ลำดับ
                         </th>
                         <th scope="col" class="px-6 py-3">
                             รูปแบนเนอร์
@@ -79,17 +128,20 @@ const handleFilePondInit = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
+                    <tr v-for="(banner, index) in banners " :key="index"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white ">
-2
+                            {{ (index + 1) }}
                         </th>
                         <td class="px-6 py-4 ">
-ss
+                            <img class="h-auto max-w-full" :src="/storage/ + banner.public_url"
+                                :alt="'Banner ' + (index + 1)" width="500" height="500" />
                         </td>
                         <td class="px-6 py-4">
                             <label class="inline-flex items-center cursor-pointer">
-                                <input type="checkbox"  class="sr-only peer">
+
+                                <input type="checkbox" :checked="banner.banner_status" class="sr-only peer"
+                                    @change="toggleBannerStatus(banner)">
                                 <div
                                     class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                                 </div>
@@ -99,11 +151,7 @@ ss
 
                         <td class="px-6 py-4 text-center">
                             <button
-                                class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">แก้ไข</button>
-
-                            <button
-                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบสินค้า</button>
-
+                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบแบนเนอร์</button>
                         </td>
                     </tr>
 
@@ -126,10 +174,10 @@ ss
             </div>
 
             <div class="p-4 md:p-5">
-                <form class="space-y-4">
-                        <file-pond name="image" ref="pond" label-idle="Drop files here..." v-bind:allow-multiple="true"
-                            accepted-file-types="image/jpeg, image/png" @change="imageForm.image = $event.target.files"
-                            @init="handleFilePondInit" />
+                <form class="space-y-4" @submit.prevent="BannerCreate">
+                    <file-pond name="image" ref="pond" label-idle="Drop files here..."
+                        accepted-file-types="image/jpeg, image/png" @change="form.image = $event.target.files[0]"
+                        @init="handleFilePondInit" />
 
                     <button type="submit"
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มแบนเนอร์</button>

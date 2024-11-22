@@ -9,6 +9,8 @@ use App\Models\Group;
 use App\Models\Kind;
 use App\Models\Products;
 use App\Models\Brands;
+use App\Models\BannerPics;
+use App\Models\Banners;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -24,7 +26,7 @@ class AdminController extends Controller
 
     public function products(Request $request)
     {
-        $products = Products::with('kinds', 'groups', 'brands', 'types', 'productPics')->orderBy('producttype_id','asc')->paginate(36);
+        $products = Products::with('kinds', 'groups', 'brands', 'types', 'productPics')->orderBy('producttype_id', 'asc')->paginate(36);
         $productKinds = Kind::all();
         $productTypes = ProductType::all();
         $productBrands = Brands::all();
@@ -153,17 +155,37 @@ class AdminController extends Controller
         ]);
     }
 
-    public function Banner(Request $request){
+    public function Banner(Request $request)
+    {
+        $banners = Banners::all();
 
-        return Inertia::render('Admin/Banner', [
+        return Inertia::render('Admin/Banner', [  'banners'=> $banners]);
 
-        ]);
+    }
+    public function toggleBannerStatus(Request $request, $id)
+    {
+        $banner = Banners::findOrFail($id);
+        $banner->banner_status = $request->status;
+        $banner->save();
+
+        return redirect()->back();
     }
 
-    public function News(Request $request){
+    public function bannerAdd(Request $request)
+    {
+        $images = $request->file('image');
+        $banner = new Banners;
+        $picture_path = $images->store('banner_image', 'public');
+        $banner->asset_url = $picture_path;
+        $banner->public_url = $picture_path;
+        $banner->save();
 
-        return Inertia::render('Admin/News', [
 
-        ]);
+        return redirect()->back();
+    }
+    public function News(Request $request)
+    {
+
+        return Inertia::render('Admin/News', []);
     }
 }

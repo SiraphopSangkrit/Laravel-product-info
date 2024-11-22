@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', [ProductController::class, 'index'])->name('product.index');
-
+Route::get('/producttype/{id}', [ProductController::class,'productCategory'])->name('product.category');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
@@ -15,7 +15,7 @@ Route::get('/', [ProductController::class, 'index'])->name('product.index');
 
 Route::middleware([
     'auth:sanctum',
-    'roles:admin',
+    'roles:admin|superadmin',
     'verified',
 ])->group(function () {
     Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -31,6 +31,8 @@ Route::middleware([
     Route::post('/admin/products/{id}/update', [AdminController::class, 'updateProduct'])->name('admin.updateProduct');
 
     Route::get('/admin/banner', [AdminController::class,'Banner'])->name('admin.banner');
+    Route::put('/admin/banner/{id}/status', [AdminController::class, 'toggleBannerStatus'])->name('admin.toggleBannerStatus');
+    Route::post('/admin/banner/create', [AdminController::class,'bannerAdd'])->name('admin.banner.create');
 
 
     Route::get('/admin/news', [AdminController::class,'News'])->name('admin.news');
