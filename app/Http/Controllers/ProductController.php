@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Models\ProductType;
 use App\Models\Products;
 use App\Models\Banners;
+use App\Models\ProductPictures;
 
 class ProductController extends Controller
 {
@@ -25,52 +26,74 @@ class ProductController extends Controller
 
     public function productCategory(Request $request, $id)
     {
-
         $productTypeId = $id;
         $productType = ProductType::find($id);
-        $brandFilters = $request->input('brands');
-        $kindFilters = $request->input('kinds');
-        $groupFilters = $request->input('groups');
 
-        $query = Products::query()->with('kinds', 'groups', 'brands', 'types', 'productPics')
+        // Retrieve filters from the request
+        $brandFilters = $request->input('brands', []);
+        $kindFilters = $request->input('kinds', []);
+        $groupFilters = $request->input('groups', []);
+
+        // Ensure filters are arrays
+        $brandFilters = is_string($brandFilters) ? explode(',', $brandFilters) : (array) $brandFilters;
+        $kindFilters = is_string($kindFilters) ? explode(',', $kindFilters) : (array) $kindFilters;
+        $groupFilters = is_string($groupFilters) ? explode(',', $groupFilters) : (array) $groupFilters;
+
+        $query = Products::with('kinds', 'groups', 'brands', 'types', 'productPics')
             ->where('product_status', 1);
-
 
         if ($productTypeId) {
             $query->where('producttype_id', $productTypeId);
         }
+
+
         $productFilterOption = $query->get();
-        $brands =  $productFilterOption->pluck('brands')->flatten()->unique('brand_id');
+        $brands = $productFilterOption->pluck('brands')->flatten()->unique('brand_id');
         $kinds = $productFilterOption->pluck('kinds')->flatten()->unique('kind_id');
         $groups = $productFilterOption->pluck('groups')->flatten()->unique('group_id');
+
         if ($brandFilters) {
-            $brandIds = explode(',', $brandFilters);
-            $query->whereHas('brands', function ($q) use ($brandIds) {
-                $q->whereIn('brand_id', $brandIds);
+            $query->whereHas('brands', function ($q) use ($brandFilters) {
+                $q->whereIn('brand_id', $brandFilters);
             });
+
+            $brandFiltersOption = $query->get();
+            $groups = $brandFiltersOption->pluck('groups')->flatten()->unique('group_id');
+            $kinds = $brandFiltersOption->pluck('kinds')->flatten()->unique('kind_id');
         }
-        $groupsFilterOption = $query->get();
-        $groups = $groupsFilterOption->pluck('groups')->flatten()->unique('group_id');
+
+
         if ($groupFilters) {
-            $groupIds = explode(',', $groupFilters); // Convert comma-separated string to array
-            $query->whereHas('groups', function ($q) use ($groupIds) {
-                $q->whereIn('group_id', $groupIds);
+            $query->whereHas('groups', function ($q) use ($groupFilters) {
+                $q->whereIn('group_id', $groupFilters);
             });
+            $groupsFilterOption = $query->get();
+            $brands = $groupsFilterOption->pluck('brands')->flatten()->unique('brand_id');
+            $kinds = $groupsFilterOption->pluck('kinds')->flatten()->unique('kind_id');
         }
-        $kindsFilterOption = $query->get();
-        $kinds = $kindsFilterOption->pluck('kinds')->flatten()->unique('kind_id');
+
         if ($kindFilters) {
-            $kindIds = explode(',', $kindFilters); // Convert comma-separated string to array
-            $query->whereHas('kinds', function ($q) use ($kindIds) {
-                $q->whereIn('kind_id', $kindIds);
+            $query->whereHas('kinds', function ($q) use ($kindFilters) {
+                $q->whereIn('kind_id', $kindFilters);
             });
+
+            $kindsFilterOption = $query->get();
+            $brands = $kindsFilterOption->pluck('brands')->flatten()->unique('brand_id');
+            $groups = $kindsFilterOption->pluck('groups')->flatten()->unique('group_id');
         }
 
 
         $products = $query->paginate(40);
 
-        $productTypes = ProductType::all();
 
+        $products->appends([
+            'brands' => implode(',', $brandFilters),
+            'kinds' => implode(',', $kindFilters),
+            'groups' => implode(',', $groupFilters),
+        ]);
+
+
+        $productTypes = ProductType::all();
 
         return Inertia::render('Main/categoryPage', [
             'product_types' => $productTypes,
@@ -80,10 +103,32 @@ class ProductController extends Controller
             'kinds' => $kinds,
             'groups' => $groups,
             'filters' => [
-                'brands' => $brandFilters ? explode(',', $brandFilters) : [],
-                'kinds' => $kindFilters ? explode(',', $kindFilters) : [],
-                'groups' => $groupFilters ? explode(',', $groupFilters) : [],
+                'brands' => $brandFilters,
+                'kinds' => $kindFilters,
+                'groups' => $groupFilters,
             ],
+        ]);
+    }
+
+    public function productDetail(Request $request)
+    {
+        $product_id = $request->product_id;
+       $product = Products::findOrFail($product_id);
+       $productPic = ProductPictures::where('product_id', $product_id)->get();
+        $productTypes = ProductType::all();
+        $brand = $product->brands;
+        $kind = $product->kinds;
+        $group = $product->groups;
+        $type = $product->types;
+
+        return Inertia::render('Main/productDetail', [
+            'product_types' => $productTypes,
+            'product' => $product,
+            'productPic'=> $productPic,
+            'brand' =>$brand,
+            'kind'=> $kind,
+            'group'=> $group,
+            'type' => $type,
         ]);
     }
 }

@@ -33,8 +33,6 @@ const activeFilters = ref({
 });
 
 
-
-
 const updateFilters = (page) => {
     const query = {
         page: 1,
@@ -44,7 +42,7 @@ const updateFilters = (page) => {
     };
 
     router.get(route('product.category', { id: props.productType.producttype_id }), query, page, {
-        preserveScroll: true,
+        preserveState:true
     });
 };
 
@@ -52,7 +50,7 @@ const updateFilters = (page) => {
 
 
 console.log(props.products)
-console.log(props.brands)
+console.log(props.filters)
 
 </script>
 <template>
@@ -60,7 +58,6 @@ console.log(props.brands)
 
         <Head>
             <title>{{ productType.producttype_name }}</title>
-            <meta name="description" content="Your page description">
         </Head>
         <template #header>
             <div class="flex ml-20 w-full mt-5 justify-center">
@@ -156,7 +153,7 @@ console.log(props.brands)
                             <section aria-labelledby="products-heading" class="pb-3 pt-6">
                                 <h2 id="products-heading" class="sr-only">Products</h2>
                                 <div class="flex flex-row">
-                                    <div class="hidden lg:block w-56">
+                                    <div class="hidden lg:block w-60">
                                         <Category>
                                             <div class="border-t border-gray-200 pb-4 pt-4 dark:border-gray-600"
                                                 v-for="product_type in product_types"
@@ -248,37 +245,6 @@ console.log(props.brands)
                                             </DisclosurePanel>
                                         </Disclosure>
 
-                                        <!-- <Disclosure as="div" v-for="section in filters" :key="section.id"
-                                            class="border-b border-gray-200 px-4 py-6" v-slot="{ open }">
-                                            <h3 class="mx-2 -my-3 flow-root">
-                                                <DisclosureButton
-                                                    class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                                    <span class="font-medium text-gray-900">{{ section.name
-                                                        }}</span>
-                                                    <span class="ml-6 flex items-center">
-                                                        <PlusIcon v-if="!open" class="size-5" aria-hidden="true" />
-                                                        <MinusIcon v-else class="size-5" aria-hidden="true" />
-                                                    </span>
-                                                </DisclosureButton>
-                                            </h3>
-                                            <DisclosurePanel class="pt-6">
-                                                <div class="space-y-6">
-                                                    <div v-for="(option, optionIdx) in section.options"
-                                                        :key="option.value" class="flex items-center">
-                                                        <input :id="`filter-mobile-${section.id}-${optionIdx}`"
-                                                            :name="`${section.id}[]`" :value="option.value"
-                                                            type="checkbox" v-model="activeFilters[section.id]"
-                                                            @change="updateFilters"
-                                                            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                                                        <label :for="`filter-mobile-${section.id}-${optionIdx}`"
-                                                            class="ml-3 min-w-0 flex-1 text-gray-500">{{
-                                                                option.label
-                                                            }}</label>
-                                                    </div>
-                                                </div>
-                                            </DisclosurePanel>
-                                        </Disclosure> -->
-
                                     </div>
 
                                     <div class="lg:col-span-3 w-full">
@@ -291,8 +257,7 @@ console.log(props.brands)
                                             <div v-for="product in products.data" :key="product.product_id">
                                                 <div
                                                     class=" bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-                                                    <a href="#">
-
+                                                    <Link :href="route('product.detail',{ product_id: product.product_id ,producttype_id:product.producttype_id})">
                                                         <img :src="product.product_pics && product.product_pics[0]
                                                             ? '/storage/' + product.product_pics[0].public_url
                                                             : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'"
@@ -315,7 +280,7 @@ console.log(props.brands)
                                                                     {{ product.product_price }}</p>
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </section>
@@ -333,11 +298,7 @@ console.log(props.brands)
                         </p>
                     </div>
                     <div class="flex justify-end mb-5 mr-4">
-                        <Pagination :elements="props.products" :filters="{
-                            brands: activeFilters.brands.join(','),
-                            groups: activeFilters.groups.join(','),
-                            kinds: activeFilters.kinds.join(',')
-                        }" @pagination-change="updateFilters" />
+                        <Pagination :elements="props.products"  @pagination-change="updateFilters" />
                     </div>
                 </div>
             </div>

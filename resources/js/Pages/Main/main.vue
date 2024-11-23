@@ -25,19 +25,15 @@ const showingNavigationDropdown = ref(false);
             <div class="flex justify-center">
                 <div class="min-h-screen w-full">
                     <div class="flex flex-row">
-                        <div class="ml-24 mt-5">
+                        <div class="ml-24 mt-5 w-52">
                             <Category>
-
-                                    <div class="border-b border-gray-200 pb-4 pt-4 dark:border-gray-600"
-                                        v-for="product_type in product_types" :key="product_type.producttype_id">
-
-                                        <Link :href="route('product.category', { id: product_type.producttype_id })"
-                                            class="pl-1 pr-2 ml-2 text-left text-base font-medium text-white dark:text-gray-200 hover:text-blue-300">
-                                        {{ product_type.producttype_name }}
-                                        </Link>
-                                    </div>
-
-
+                                <div class="border-b border-gray-200 pb-4 pt-4 dark:border-gray-600"
+                                    v-for="product_type in product_types" :key="product_type.producttype_id">
+                                    <Link :href="route('product.category', { id: product_type.producttype_id })"
+                                        class="pl-1 pr-2 ml-2 text-left text-base font-medium text-white dark:text-gray-200 hover:text-blue-300">
+                                    {{ product_type.producttype_name }}
+                                    </Link>
+                                </div>
                             </Category>
                         </div>
                         <div class="flex flex-col">

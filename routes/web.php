@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [ProductController::class, 'index'])->name('product.index');
 Route::get('/producttype/{id}', [ProductController::class,'productCategory'])->name('product.category');
+Route::get('/product/{product_id}/{producttype_id}', [ProductController::class,'productDetail'])->name('product.detail');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

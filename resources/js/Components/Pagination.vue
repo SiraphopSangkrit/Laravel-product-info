@@ -23,7 +23,7 @@
 
   <script setup>
   import { Link } from '@inertiajs/vue3';
- 
+
 
   const props = defineProps(['elements', 'filters']);
 
@@ -33,6 +33,7 @@
     if (label.includes('&raquo;')) return 'ต่อไป';
     return label.replace(/&[^;]+;/g, '');
   };
+
 
   const buildLink = (url) => {
     if (!props.filters) return url;
