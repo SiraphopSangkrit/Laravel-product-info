@@ -26,6 +26,8 @@
         "filepond-plugin-file-validate-type": "^1.2.9",
         "filepond-plugin-image-preview": "^4.6.12",
         "flowbite": "^2.5.2",
+        "laravel-permission-to-vuejs": "^3.0.8",
+        "lodash.debounce": "^4.0.8",
         "simple-datatables": "^9.2.1",
         "sweetalert2": "^11.6.13",
         "vue-filepond": "^7.0.4",

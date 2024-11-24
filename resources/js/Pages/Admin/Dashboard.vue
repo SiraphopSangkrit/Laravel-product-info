@@ -9,7 +9,9 @@ import { Head } from '@inertiajs/vue3';
         <Head title="Dashboard" />
 
         <div class="grid grid-cols-3 gap-2">
-
+            <LinkCard :href="route('product.index')" class="w-full">
+                หน้าเว็บไซต์
+            </LinkCard>
             <LinkCard :href="route('admin.products')" class="w-full">
                 สินค้า
             </LinkCard>
@@ -31,6 +33,12 @@ import { Head } from '@inertiajs/vue3';
             <LinkCard :href="route('admin.news')" class="w-full">
                 ข่าว
             </LinkCard>
+            <div v-if="is('superadmin')">
+                <LinkCard :href="route('admin.userAdmin')" class="w-full">
+                   ผู้ใช้งาน
+                </LinkCard>
+
+            </div>
         </div>
 
 

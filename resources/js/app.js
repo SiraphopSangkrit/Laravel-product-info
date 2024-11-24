@@ -1,14 +1,14 @@
 import "../css/app.css";
 import "./bootstrap";
-import { onMounted } from 'vue';
-import { initFlowbite } from 'flowbite';
-
+import { onMounted } from "vue";
+import { initFlowbite } from "flowbite";
+import LaravelPermissionToVueJS from "laravel-permission-to-vuejs";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createApp, h } from "vue";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 
-import 'flowbite';
+import "flowbite";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 createInertiaApp({
@@ -22,16 +22,15 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(LaravelPermissionToVueJS)
             .mixin({
                 mounted() {
                     initFlowbite();
-                }
+                },
             })
             .mount(el);
     },
     progress: {
         color: "#4B5563",
     },
-
 });
-

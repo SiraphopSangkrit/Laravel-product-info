@@ -19,11 +19,11 @@ import { Link } from '@inertiajs/vue3';
                             </path>
                         </svg>
                     </button>
-                    <Link :href="route('product.index')" class="flex ms-2 md:me-24">
+
 
                     <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
-                    </Link>
+                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">TPPS admin</span>
+
                 </div>
                 <div class="flex items-center">
                     <div class="flex items-center ms-3">
@@ -67,6 +67,12 @@ import { Link } from '@inertiajs/vue3';
         aria-label="Sidebar">
         <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul class="space-y-2 text-base">
+                <li>
+                    <Link :href="route('product.index')"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ">
+                    <span class="ms-3">หน้าเว็บไซต์</span>
+                    </Link>
+                </li>
                 <li>
                     <Link :href="route('admin.dashboard')"  :class="{ 'active bg-gray-200 ' : $page.url === '/admin'}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ">
@@ -120,6 +126,14 @@ import { Link } from '@inertiajs/vue3';
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                     <span class="flex-1 ms-3 whitespace-nowrap">ชนิดสินค้า</span>
+                    </Link>
+                </li>
+
+                <li v-if="is('superadmin')">
+                    <Link :href="route('admin.userAdmin')" :class="{ 'active bg-gray-200 ' :$page.url === '/admin/user'}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                    <span class="flex-1 ms-3 whitespace-nowrap">ผู้ใช้งาน</span>
                     </Link>
                 </li>
             </ul>

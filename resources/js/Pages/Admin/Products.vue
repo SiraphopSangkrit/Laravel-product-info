@@ -1,17 +1,17 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Modal from '@/Components/Modal.vue';
-import {Head} from '@inertiajs/vue3';
-import { ref } from 'vue';
+import InputError from '@/Components/InputError.vue';
+import { computed, ref, watch } from 'vue';
 import Pagination from '@/Components/Pagination.vue';
-import { router } from '@inertiajs/vue3';
+import { router, useForm, usePage, Head } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
-import { useForm } from '@inertiajs/vue3';
 import vueFilePond from "vue-filepond";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import debounce from 'lodash/debounce';
 
 
 const FilePond = vueFilePond(
@@ -48,6 +48,7 @@ const openImgModal = (product) => {
     imageForm.product_id = product.product_id;
     ShowImg.value = true;
 };
+
 
 const openEditModal = (product) => {
     editForm.product_id_edit = product.product_id;
@@ -100,7 +101,6 @@ const imageForm = useForm({
 const AddImage = () => {
     imageForm.post(route('admin.addProductPics', { id: imageForm.product_id }),
         {
-
             onSuccess: () => {
                 handleClose();
                 Toast.fire({
@@ -117,7 +117,6 @@ const AddImage = () => {
             }
         });
 }
-
 const ProductImgDelete = ($ProductPicId) => {
     router.delete(route('admin.deleteProductPics', $ProductPicId), {
         onSuccess: () => {
@@ -219,14 +218,44 @@ const Toast = Swal.mixin({
 });
 
 const handleFilePondInit = () => {
-
 }
+const props = defineProps(['products', 'productTypes', 'productKinds', 'productGroups', 'productBrands','search']);
 
-const props = defineProps(['products', 'productTypes', 'productTypes', 'productKinds', 'productGroups', 'productBrands'])
+let searchQuery = ref(props.search ||''),
+    pageNumber = ref(1);
+
+let productUrl = computed(() => {
+    let url = new URL(route('admin.products'));
+
+    url.searchParams.append("page", pageNumber.value);
+
+
+    if (searchQuery.value) {
+        url.searchParams.append("search", searchQuery.value);
+    }
+
+    return url;
+})
+
+watch(
+    () => productUrl.value,
+    (updateProductUrl) => {
+
+        router.visit(updateProductUrl, {
+            preserveScroll: true,
+            preserveState: true,
+            replace: true
+        });
+
+    }
+)
+
+
 
 </script>
 <template>
     <AdminLayout>
+
         <Head title="Products" />
         <div>
 
@@ -234,7 +263,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                 class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">เพิ่มสินค้า</button>
         </div>
 
-        <form class="w-1/3 my-5">
+        <div class="w-1/3 my-5">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -245,14 +274,15 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                             d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                 </div>
-                <input type="search" id="default-search"
+                <input type="search" id="default-search" v-model="searchQuery"
                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="" />
-                <button type="submit"
-                    class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
-        </form>
-
+        </div>
+        <div class="flex justify-between mb-5">
+            filters
+            <Pagination :links="props.products.links"></Pagination>
+        </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-base text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -288,7 +318,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                         <th scope="col" class="px-6 py-3">
                             Status
                         </th>
-                        <th scope="col" class="px-6 py-3 ">
+                        <th scope="col" class="px-6 py-3">
 
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -339,9 +369,11 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                             </label>
                         </td>
                         <td class="px-6 py-4 w-1/12">
-                            <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                            <button
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                                 @click="openImgModal(product)">รูปสินค้า</button>
                         </td>
+
                         <td class="px-6 py-4 text-center">
 
                             <button
@@ -359,7 +391,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
             </table>
         </div>
         <div class="flex justify-end">
-            <pagination :elements="props.products"></pagination>
+            <Pagination :links="props.products.links"></Pagination>
         </div>
 
         <Modal :show="ShowImg" @close="handleClose" maxWidth="6xl" closeable>
@@ -402,8 +434,6 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
             </div>
         </Modal>
 
-
-
         <!------------------------Create Modal------------------------->
         <Modal :show="CreateModal" @close="handleClose" maxWidth="6xl" closeable>
 
@@ -429,6 +459,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                             <input type="text" v-model="createForm.product_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="รหัสสินค้า" required />
+                            <InputError class="mt-2" :message="createForm.errors.product_id" />
                         </div>
                         <div class="w-full mx-2">
                             <label
@@ -436,6 +467,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                             <input type="text" v-model="createForm.product_name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="ชื่อสินค้า" required />
+                            <InputError class="mt-2" :message="createForm.errors.product_name" />
                         </div>
                     </div>
                     <div class="flex flex-row">
@@ -450,6 +482,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                     :value="type.producttype_id">{{
                                         type.producttype_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="createForm.errors.producttype_id" />
                         </div>
 
                         <div class="w-full mx-2">
@@ -461,6 +494,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                 <option v-for="brand in productBrands" :key="brand.brand_id" :value="brand.brand_id">{{
                                     brand.brand_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="createForm.errors.brand_id" />
                         </div>
 
                         <div class="w-full mx-2">
@@ -472,6 +506,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                 <option v-for="group in productGroups" :key="group.group_id" :value="group.group_id">{{
                                     group.group_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="createForm.errors.group_id" />
                         </div>
                         <div class="w-full mx-2">
                             <label
@@ -482,6 +517,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                 <option v-for="kind in productKinds" :key="kind.kind_id" :value="kind.kind_id">{{
                                     kind.kind_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="createForm.errors.kind_id" />
                         </div>
                     </div>
                     <div>
@@ -490,6 +526,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                         <textarea id="message" rows="4" v-model="createForm.product_desc"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า" required></textarea>
+                        <InputError class="mt-2" :message="createForm.errors.product_desc" />
                     </div>
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
@@ -509,7 +546,8 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ราคาสินค้า</label>
                         <input type="number" v-model="createForm.product_price"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                            placeholder="Product Price" required min=0 />
+                            placeholder="ราคาสินค้า" required min=0 />
+                        <InputError class="mt-2" :message="createForm.errors.product_price" />
                     </div>
                     <button type="submit"
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create
@@ -546,6 +584,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                             <input type="text" v-model="editForm.product_id_edit"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="รหัสสินค้า" required disabled />
+
                         </div>
                         <div class="w-full mx-2">
                             <label
@@ -553,6 +592,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                             <input type="text" v-model="editForm.product_name_edit"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="ชื่อสินค้า" required />
+                            <InputError class="mt-2" :message="editForm.errors.product_name_edit" />
                         </div>
                     </div>
                     <div class="flex flex-row">
@@ -567,6 +607,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                     :value="type.producttype_id">{{
                                         type.producttype_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="editForm.errors.producttype_id_edit" />
                         </div>
 
                         <div class="w-full mx-2">
@@ -578,6 +619,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                 <option v-for="brand in productBrands" :key="brand.brand_id" :value="brand.brand_id">{{
                                     brand.brand_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="editForm.errors.brand_id_edit" />
                         </div>
 
                         <div class="w-full mx-2">
@@ -589,6 +631,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                 <option v-for="group in productGroups" :key="group.group_id" :value="group.group_id">{{
                                     group.group_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="editForm.errors.group_id_edit" />
                         </div>
                         <div class="w-full mx-2">
                             <label
@@ -599,6 +642,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                                 <option v-for="kind in productKinds" :key="kind.kind_id" :value="kind.kind_id">{{
                                     kind.kind_name }}</option>
                             </select>
+                            <InputError class="mt-2" :message="editForm.errors.kind_id_edit" />
                         </div>
                     </div>
                     <div>
@@ -607,6 +651,7 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                         <textarea id="message" rows="4" v-model="editForm.product_desc_edit"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า"></textarea>
+                        <InputError class="mt-2" :message="editForm.errors.product_desc_edit" />
                     </div>
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
@@ -627,7 +672,9 @@ const props = defineProps(['products', 'productTypes', 'productTypes', 'productK
                         <input type="number" id="product_price" v-model="editForm.product_price_edit"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Product Price" required min=0 />
+                        <InputError class="mt-2" :message="editForm.errors.product_price_edit" />
                     </div>
+
                     <button type="submit"
                         class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">อัพเดตสินค้า</button>
                 </form>

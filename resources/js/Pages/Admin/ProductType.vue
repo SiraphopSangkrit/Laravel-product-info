@@ -1,10 +1,13 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { reactive } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import { ref } from 'vue';
 import Modal from '@/Components/Modal.vue';
 import { Head } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
+
+
 const CreateModal = ref(false);
 
 const openCreateModal = () => {
@@ -14,19 +17,66 @@ const openCreateModal = () => {
 const handleClose = () => {
     CreateModal.value = false;
 };
+
+const CreateProductTypeForm = useForm({
+    producttype_id : '',
+    producttype_name : '',
+})
+
+const EditProductTypeForm = useForm({
+    producttype_id : '',
+    producttype_name : '',
+})
+
+const productTypeCreate = () => {
+    productTypeForm.post(route('admin.productTypes.create'), {
+        onSuccess: () => {
+            handleClose();
+            Toast.fire({
+                icon: "success",
+                title: "เพิ่มประเภทสินค้าสำเร็จ"
+            });
+        },
+        onError: () => {
+            handleClose();
+            Toast.fire({
+                icon: "error",
+                title: "เพิ่มประเภทสินค้าไม่สำเร็จ"
+            });
+        }
+    });
+}
+
+
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+    }
+});
+
+
+
 const props = defineProps(['productTypes'])
 
 
 </script>
 <template>
     <AdminLayout>
+
         <Head title="Types" />
         <div>
             <button type="button" @click="openCreateModal"
                 class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">เพิ่มประเภทสินค้า</button>
         </div>
 
-        <form class="w-1/3 my-5">
+        <div class="w-1/3 my-5">
             <label for="default-search"
                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
@@ -40,10 +90,11 @@ const props = defineProps(['productTypes'])
                 <input type="search" id="default-search"
                     class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="" />
-                <button type="submit"
-                    class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
-        </form>
+        </div>
+        <div class="flex justify-end my-3">
+            <pagination :links="props.productTypes.links"></pagination>
+        </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-base text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -77,16 +128,15 @@ const props = defineProps(['productTypes'])
                                 @click="openEditModal(product)">แก้ไข</button>
 
                             <button
-                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                >ลบประเภทสินค้า</button>
+                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบประเภทสินค้า</button>
                         </td>
                     </tr>
 
                 </tbody>
             </table>
         </div>
-        <div class="flex justify-end">
-            <pagination :elements="props.productTypes"></pagination>
+        <div class="flex justify-end my-3">
+            <pagination :links="props.productTypes.links"></pagination>
         </div>
 
         <Modal :show="CreateModal" @close="handleClose" maxWidth="6xl" closeable>
