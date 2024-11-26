@@ -20,6 +20,7 @@ import {
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid'
 import Category from '@/Components/Category.vue';
+import axios from 'axios';
 
 const mobileFiltersOpen = ref(false)
 const props = defineProps(['products', 'product_types', 'productType', 'brands', 'kinds', 'groups', 'filters']);
@@ -29,7 +30,6 @@ const activeFilters = ref({
     kinds: props.filters.kinds || [],
     groups: props.filters.groups || [],
 });
-
 
 
 watch([() => activeFilters.value.brands,
@@ -53,8 +53,12 @@ const updateFilters = () => {
     });
 };
 
+const goToProduct = (result) => {
+    router.get(route('product.detail', { product_id: result.product_id, producttype_id: result.producttype_id }));
+};
 
-console.log(props.products.links)
+
+
 </script>
 <template>
     <AppLayout>
@@ -63,8 +67,8 @@ console.log(props.products.links)
             <title>{{ productType.producttype_name }}</title>
         </Head>
         <template #header>
-            <div class="flex ml-20 w-full mt-5 justify-center">
-                <SearchInput class="w-2/3"></SearchInput>
+            <div class="flex w-full justify-center">
+                <SearchInput></SearchInput>
             </div>
         </template>
         <div>
@@ -99,106 +103,116 @@ console.log(props.products.links)
                                                 </button>
                                             </div>
 
-                                            <Category>
-                                                <div class="border-t border-gray-200 pb-4 pt-4 dark:border-gray-600"
-                                                    v-for="product_type in product_types"
-                                                    :key="product_type.producttype_id">
+                                            <Disclosure as="div" class="border-b border-gray-200 px-4 py-6"
+                                                v-slot="{ open }">
+                                                <h3 class="mx-2 -my-3 flow-root">
+                                                    <DisclosureButton
+                                                        class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                                        <span class="font-medium text-gray-900">หมวดหมู่สินค้า</span>
+                                                        <span class="ml-6 flex items-center">
+                                                            <PlusIcon v-if="!open" class="size-5" aria-hidden="true" />
+                                                            <MinusIcon v-else class="size-5" aria-hidden="true" />
+                                                        </span>
+                                                    </DisclosureButton>
+                                                </h3>
+                                                <DisclosurePanel class="pt-6">
+                                                    <div class="space-y-6">
+                                                        <div v-for="product_type in product_types"
+                                                            :key="product_type.producttype_id">
 
-                                                    <Link
-                                                        :href="route('product.category', { id: product_type.producttype_id })"
-                                                        class="pl-1 pr-2 ml-2 text-left text-base font-medium text-white dark:text-gray-200 hover:text-blue-300">
-                                                    {{ product_type.producttype_name }}
-                                                    </Link>
-                                                </div>
-                                            </Category>
-                                            <form class="mt-4 border-t border-gray-200">
+                                                            <Link
+                                                                :href="route('product.category', { id: product_type.producttype_id })"
+                                                                class="pl-1 pr-2 ml-2 text-left text-base font-medium text-gray-500 dark:text-gray-200 hover:text-gray-800">
+                                                            {{ product_type.producttype_name }}
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                </DisclosurePanel>
+                                            </Disclosure>
 
 
-                                                <Disclosure as="div" class="border-b border-gray-200 px-4 py-6"
-                                                    v-slot="{ open }">
-                                                    <h3 class="mx-2 -my-3 flow-root">
-                                                        <DisclosureButton
-                                                            class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                                            <span class="font-medium text-gray-900">แบรนด์</span>
-                                                            <span class="ml-6 flex items-center">
-                                                                <PlusIcon v-if="!open" class="size-5"
-                                                                    aria-hidden="true" />
-                                                                <MinusIcon v-else class="size-5" aria-hidden="true" />
-                                                            </span>
-                                                        </DisclosureButton>
-                                                    </h3>
-                                                    <DisclosurePanel class="pt-6">
-                                                        <div class="space-y-6">
-                                                            <div v-for="brandFilter in brands"
-                                                                :key="brandFilter.brand_id" class="flex items-center">
-                                                                <input name="brands" :value="brandFilter.brand_id"
-                                                                    type="checkbox" v-model="activeFilters.brands"
-                                                                    class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                                                                <label class="ml-3 min-w-0 flex-1 text-gray-500">{{
-                                                                    brandFilter.brand_name }}</label>
-                                                            </div>
+                                            <Disclosure as="div" class="border-b border-gray-200 px-4 py-6"
+                                                v-slot="{ open }">
+                                                <h3 class="mx-2 -my-3 flow-root">
+                                                    <DisclosureButton
+                                                        class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                                        <span class="font-medium text-gray-900">แบรนด์</span>
+                                                        <span class="ml-6 flex items-center">
+                                                            <PlusIcon v-if="!open" class="size-5" aria-hidden="true" />
+                                                            <MinusIcon v-else class="size-5" aria-hidden="true" />
+                                                        </span>
+                                                    </DisclosureButton>
+                                                </h3>
+                                                <DisclosurePanel class="pt-6">
+                                                    <div class="space-y-6">
+                                                        <div v-for="brandFilter in brands" :key="brandFilter.brand_id"
+                                                            class="flex items-center">
+                                                            <input name="brands" :value="brandFilter.brand_id"
+                                                                type="checkbox" v-model="activeFilters.brands"
+                                                                class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                                                            <label class="ml-3 min-w-0 flex-1 text-gray-500">{{
+                                                                brandFilter.brand_name }}</label>
                                                         </div>
-                                                    </DisclosurePanel>
-                                                </Disclosure>
-                                                <Disclosure as="div" class="border-b border-gray-200 px-4 py-6"
-                                                    v-slot="{ open }">
-                                                    <h3 class="mx-2 -my-3 flow-root">
-                                                        <DisclosureButton
-                                                            class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                                            <span class="font-medium text-gray-900">กลุ่มสินค้า</span>
-                                                            <span class="ml-6 flex items-center">
-                                                                <PlusIcon v-if="!open" class="size-5"
-                                                                    aria-hidden="true" />
-                                                                <MinusIcon v-else class="size-5" aria-hidden="true" />
-                                                            </span>
-                                                        </DisclosureButton>
-                                                    </h3>
-                                                    <DisclosurePanel class="pt-6">
-                                                        <div class="space-y-6">
-                                                            <div v-for="groupFilter in groups"
-                                                                :key="groupFilter.group_id" class="flex items-center">
-                                                                <input name="groups" :value="groupFilter.group_id"
-                                                                    type="checkbox" v-model="activeFilters.groups"
-                                                                    class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                                                                <label class="ml-3 min-w-0 flex-1 text-gray-500">{{
-                                                                    groupFilter.group_name }}</label>
-                                                            </div>
+                                                    </div>
+                                                </DisclosurePanel>
+                                            </Disclosure>
+                                            <Disclosure as="div" class="border-b border-gray-200 px-4 py-6"
+                                                v-slot="{ open }">
+                                                <h3 class="mx-2 -my-3 flow-root">
+                                                    <DisclosureButton
+                                                        class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                                        <span class="font-medium text-gray-900">กลุ่มสินค้า</span>
+                                                        <span class="ml-6 flex items-center">
+                                                            <PlusIcon v-if="!open" class="size-5" aria-hidden="true" />
+                                                            <MinusIcon v-else class="size-5" aria-hidden="true" />
+                                                        </span>
+                                                    </DisclosureButton>
+                                                </h3>
+                                                <DisclosurePanel class="pt-6">
+                                                    <div class="space-y-6">
+                                                        <div v-for="groupFilter in groups" :key="groupFilter.group_id"
+                                                            class="flex items-center">
+                                                            <input name="groups" :value="groupFilter.group_id"
+                                                                type="checkbox" v-model="activeFilters.groups"
+                                                                class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                                                            <label class="ml-3 min-w-0 flex-1 text-gray-500">{{
+                                                                groupFilter.group_name }}</label>
                                                         </div>
-                                                    </DisclosurePanel>
-                                                </Disclosure>
-                                                <Disclosure as="div" class="border-b border-gray-200 px-4 py-6"
-                                                    v-slot="{ open }">
-                                                    <h3 class="mx-2 -my-3 flow-root">
-                                                        <DisclosureButton
-                                                            class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                                            <span class="font-medium text-gray-900">ชนิดสินค้า</span>
-                                                            <span class="ml-6 flex items-center">
-                                                                <PlusIcon v-if="!open" class="size-5"
-                                                                    aria-hidden="true" />
-                                                                <MinusIcon v-else class="size-5" aria-hidden="true" />
-                                                            </span>
-                                                        </DisclosureButton>
-                                                    </h3>
-                                                    <DisclosurePanel class="pt-6">
-                                                        <div class="space-y-6">
-                                                            <div v-for="kindFilter in kinds" :key="kindFilter.kind_id"
-                                                                class="flex items-center">
-                                                                <input name="brands" :value="kindFilter.kind_id"
-                                                                    type="checkbox" v-model="activeFilters.kinds"
-                                                                    class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                                                                <label class="ml-3 min-w-0 flex-1 text-gray-500">{{
-                                                                    kindFilter.kind_name }}</label>
-                                                            </div>
+                                                    </div>
+                                                </DisclosurePanel>
+                                            </Disclosure>
+                                            <Disclosure as="div" class="border-b border-gray-200 px-4 py-6"
+                                                v-slot="{ open }">
+                                                <h3 class="mx-2 -my-3 flow-root">
+                                                    <DisclosureButton
+                                                        class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                                        <span class="font-medium text-gray-900">ชนิดสินค้า</span>
+                                                        <span class="ml-6 flex items-center">
+                                                            <PlusIcon v-if="!open" class="size-5" aria-hidden="true" />
+                                                            <MinusIcon v-else class="size-5" aria-hidden="true" />
+                                                        </span>
+                                                    </DisclosureButton>
+                                                </h3>
+                                                <DisclosurePanel class="pt-6">
+                                                    <div class="space-y-6">
+                                                        <div v-for="kindFilter in kinds" :key="kindFilter.kind_id"
+                                                            class="flex items-center">
+                                                            <input name="brands" :value="kindFilter.kind_id"
+                                                                type="checkbox" v-model="activeFilters.kinds"
+                                                                class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                                                            <label class="ml-3 min-w-0 flex-1 text-gray-500">{{
+                                                                kindFilter.kind_name }}</label>
                                                         </div>
-                                                    </DisclosurePanel>
-                                                </Disclosure>
-                                            </form>
+                                                    </div>
+                                                </DisclosurePanel>
+                                            </Disclosure>
+
                                         </DialogPanel>
                                     </TransitionChild>
                                 </div>
                             </Dialog>
                         </TransitionRoot>
-                        <main class="mr-6 ml-6 w-full px-4 sm:px-6 lg:px-8">
+                        <main class="w-full px-4 sm:px-6 lg:px-8">
                             <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-12">
                                 <h1 class="text-4xl font-bold tracking-tight text-gray-900 ml-5">{{
                                     productType.producttype_name
@@ -216,16 +230,19 @@ console.log(props.products.links)
                             <section aria-labelledby="products-heading" class="pb-3 pt-6">
                                 <h2 id="products-heading" class="sr-only">Products</h2>
                                 <div class="flex flex-row">
-                                    <div class="hidden lg:block w-60">
+                                    <div class="hidden lg:block w-64">
                                         <Category>
-                                            <div class="border-t border-gray-200 pb-4 pt-4 dark:border-gray-600"
-                                                v-for="product_type in product_types"
+                                            <div v-for="product_type in product_types"
                                                 :key="product_type.producttype_id">
-
                                                 <Link
-                                                    :href="route('product.category', { id: product_type.producttype_id })"
-                                                    class="pl-1 pr-2 ml-2 text-left text-base font-medium text-white dark:text-gray-200 hover:text-blue-300">
-                                                {{ product_type.producttype_name }}
+                                                    :href="route('product.category', { id: product_type.producttype_id })">
+                                                <div class="pb-4 pt-4 dark:border-gray-600 hover:bg-blue-500 rounded-lg">
+                                                    <div
+                                                        class="pl-1 pr-2 text-lg font-medium ml-2 text-white dark:text-gray-200">
+
+                                                        {{ product_type.producttype_name }}
+                                                    </div>
+                                                </div>
                                                 </Link>
                                             </div>
                                         </Category>
@@ -308,13 +325,13 @@ console.log(props.products.links)
 
                                     </div>
 
-                                    <div class="lg:col-span-3 w-full">
+                                    <div class="lg:col-span-3 w-full ml-10">
                                         <div class="flex justify-end mb-5 mr-5">
                                             <Pagination :links="props.products.links">
                                             </Pagination>
                                         </div>
                                         <section id="Projects"
-                                            class="w-fit grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 ml-24 p-10 rounded-lg">
+                                            class="w-fit grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 xl:ml-24 lg:ml-20 lg:mr-10 p-10 rounded-lg ">
                                             <div v-for="product in products.data" :key="product.product_id">
                                                 <div
                                                     class=" bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
@@ -359,7 +376,7 @@ console.log(props.products.links)
                             {{ products.from }} - {{ products.to }} ชิ้น จาก {{ products.total }} ชิ้น
                         </p>
                     </div>
-                    <div class="flex justify-end mb-5 mr-4">
+                    <div class="flex justify-end my-5 mr-4">
                         <Pagination :links="props.products.links" />
                     </div>
                 </div>

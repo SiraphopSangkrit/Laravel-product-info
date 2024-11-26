@@ -8,7 +8,10 @@ use App\Models\Brands;
 use App\Models\Group;
 use App\Models\Kind;
 use App\Models\ProductType;
+
+
 class Products extends Model
+
 {
     use HasFactory;
     protected $table = 'products';
@@ -39,4 +42,5 @@ class Products extends Model
     public function productPics(){
         return $this->hasMany(ProductPictures::class,'product_id');
     }
+
 }

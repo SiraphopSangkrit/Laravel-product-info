@@ -44,6 +44,30 @@ const AdminCreate = () => {
     });
 }
 
+
+const handleDelete = (admin) => {
+    Swal.fire({
+        title: 'ต้องการลบสิ่งนี้หรือไม่?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'ไม่ต้องการ',
+        confirmButtonText: 'ใช่,ฉันต้องการลบ!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.delete(route('admin.userAdmin.delete', {
+                id: admin .user_id,
+            }));
+            Swal.fire(
+                'Deleted!',
+                'User has been deleted.',
+                'success'
+            );
+        }
+    });
+};
+
 const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -108,7 +132,7 @@ defineProps({adminUsers:Object})
                             {{ admin.email }}
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <button
+                            <button @click="handleDelete(admin)"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบสินค้า</button>
                         </td>
                     </tr>
@@ -130,22 +154,22 @@ defineProps({adminUsers:Object})
             </div>
 
             <div class="p-4 md:p-5">
-                <form class="space-y-4">
+                <form class="space-y-4" @submit.prevent="AdminCreate">
                     <div class="flex flex-row">
 
 
                         <div class="w-full ">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อ</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">ชื่อ</label>
                             <input type="text" v-model="createAdminForm.firstname"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="ชื่อ" required />
                         </div>
                         <div class="w-full ml-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">นามสกุล</label>
+                                class="block mb-2 text-lg  font-medium text-gray-900 dark:text-white">นามสกุล</label>
                             <input type="text" v-model="createAdminForm.lastname"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="นามสกุล" required />
                         </div>
                     </div>
@@ -154,22 +178,24 @@ defineProps({adminUsers:Object})
 
                         <div class="w-full ">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                                class="block mb-2 text-lg  font-medium text-gray-900 dark:text-white">Username</label>
                             <input type="text" v-model="createAdminForm.username"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Username" required />
+                                <InputError class="mt-2" :message="createAdminForm.errors.username" />
                         </div>
                         <div class="w-full ml-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Email</label>
                             <input type="email" v-model="createAdminForm.email"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg  rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="email" required />
+                                <InputError class="mt-2" :message="createAdminForm.errors.email" />
                         </div>
                     </div>
 
                     <button type="submit"
-                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มแอดมิน</button>
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มแอดมิน</button>
                 </form>
             </div>
         </Modal>

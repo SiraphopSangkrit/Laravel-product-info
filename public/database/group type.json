@@ -1,0 +1,286 @@
+[
+	{
+		"group_id" : "G01",
+		"group_name" : "เหล็กเส้น"
+	},
+	{
+		"group_id" : "G02",
+		"group_name" : "ตะแกรงเหล็ก"
+	},
+	{
+		"group_id" : "G03",
+		"group_name" : "ลวดและตาข่าย"
+	},
+	{
+		"group_id" : "G04",
+		"group_name" : "เหล็กรูปพรรณ"
+	},
+	{
+		"group_id" : "G05",
+		"group_name" : "เหล็กแผ่นทุกประเภท"
+	},
+	{
+		"group_id" : "G06",
+		"group_name" : "ตะปูทุกประเภท"
+	},
+	{
+		"group_id" : "G60",
+		"group_name" : "ปูนซีเมนต์ ฉาบ ก่อ เท ทุกชนิด"
+	},
+	{
+		"group_id" : "G08",
+		"group_name" : "ไม้ทุกชนิด"
+	},
+	{
+		"group_id" : "G09",
+		"group_name" : "วัสดุมุงหลังคา"
+	},
+	{
+		"group_id" : "G10",
+		"group_name" : "สีและอุปกรณ์"
+	},
+	{
+		"group_id" : "G11",
+		"group_name" : "น้ำยาเฉพาะทาง"
+	},
+	{
+		"group_id" : "G12",
+		"group_name" : "เคมีก่อสร้าง"
+	},
+	{
+		"group_id" : "G13",
+		"group_name" : "เครื่องมือช่างยนต์"
+	},
+	{
+		"group_id" : "G14",
+		"group_name" : "เมนสวิตซ์ คัตเอาท์ เบรคเกอร์"
+	},
+	{
+		"group_id" : "G15",
+		"group_name" : "ท่อร้อยสายและอุปกรณ์เดินระบบ"
+	},
+	{
+		"group_id" : "G16",
+		"group_name" : "สายไฟทุกประเภท"
+	},
+	{
+		"group_id" : "G17",
+		"group_name" : "เครื่องใช้ไฟฟ้า"
+	},
+	{
+		"group_id" : "G18",
+		"group_name" : "ปั๊มน้ำ/เครื่องสูบน้ำ"
+	},
+	{
+		"group_id" : "G19",
+		"group_name" : "ถัง"
+	},
+	{
+		"group_id" : "G20",
+		"group_name" : "อุปกรณ์เสริมงานประปา"
+	},
+	{
+		"group_id" : "G21",
+		"group_name" : "ท่อน้ำประปาและข้อต่อ"
+	},
+	{
+		"group_id" : "G22",
+		"group_name" : "อุปกรณ์รดน้ำต้นไม้"
+	},
+	{
+		"group_id" : "G23",
+		"group_name" : "เครื่องมือทำสวน"
+	},
+	{
+		"group_id" : "G24",
+		"group_name" : "อุปกรณ์ทำสวน"
+	},
+	{
+		"group_id" : "G25",
+		"group_name" : "ประตูและวงกบ"
+	},
+	{
+		"group_id" : "G26",
+		"group_name" : "สุขภัณฑ์"
+	},
+	{
+		"group_id" : "G27",
+		"group_name" : "อ่างล้างน้ำ"
+	},
+	{
+		"group_id" : "G28",
+		"group_name" : "ก๊อกน้ำ"
+	},
+	{
+		"group_id" : "G29",
+		"group_name" : "อุปกรณ์ห้องน้ำ"
+	},
+	{
+		"group_id" : "G30",
+		"group_name" : "ฝักบัววาล์วและสต๊อปวาล์ว"
+	},
+	{
+		"group_id" : "G31",
+		"group_name" : "น้ำยาทำความสะอาดพื้น"
+	},
+	{
+		"group_id" : "G32",
+		"group_name" : "อุปกรณ์ความปลอดภัย"
+	},
+	{
+		"group_id" : "G40",
+		"group_name" : "อุปกรณ์โซ่สลิง"
+	},
+	{
+		"group_id" : "G34",
+		"group_name" : "เครื่องมือไฟฟ้า แบตเตอรี่ ลม"
+	},
+	{
+		"group_id" : "G35",
+		"group_name" : "เครื่องมืองานไม้"
+	},
+	{
+		"group_id" : "G44",
+		"group_name" : "เครื่องมือช่างทั่วไป"
+	},
+	{
+		"group_id" : "G36",
+		"group_name" : "อุปกรณ์ประตู หน้าต่าง"
+	},
+	{
+		"group_id" : "G37",
+		"group_name" : "เครื่องมือก่อสร้าง"
+	},
+	{
+		"group_id" : "G38",
+		"group_name" : "ปลั๊กและสวิตซ์ไฟฟ้า"
+	},
+	{
+		"group_id" : "G39",
+		"group_name" : "เหล็กปลอก/เสาเอ็นทับหลัง"
+	},
+	{
+		"group_id" : "G41",
+		"group_name" : "อุปกรณ์ยึดติด"
+	},
+	{
+		"group_id" : "G42",
+		"group_name" : "ถังน้ำและถังบำบัด"
+	},
+	{
+		"group_id" : "G43",
+		"group_name" : "อุปกรณ์ความปลอดภัย"
+	},
+	{
+		"group_id" : "G45",
+		"group_name" : "เครื่องมืองานปูน"
+	},
+	{
+		"group_id" : "G46",
+		"group_name" : "อุปกรณ์เชื่อมและบัดกรี"
+	},
+	{
+		"group_id" : "G47",
+		"group_name" : "ผลิตภัณฑ์ทำความสะอาด"
+	},
+	{
+		"group_id" : "G48",
+		"group_name" : "เครื่องมือทุ่นแรงทุกชนิด"
+	},
+	{
+		"group_id" : "G49",
+		"group_name" : "อุปกรณ์ทั่วไป"
+	},
+	{
+		"group_id" : "G50",
+		"group_name" : "สว่านและดอกสว่าน"
+	},
+	{
+		"group_id" : "G51",
+		"group_name" : "เครื่องมือโรงงาน"
+	},
+	{
+		"group_id" : "G52",
+		"group_name" : "เลื่อยและอุปกรณ์"
+	},
+	{
+		"group_id" : "G53",
+		"group_name" : "เครื่องมือขัน"
+	},
+	{
+		"group_id" : "G54",
+		"group_name" : "เครื่องมือตัด"
+	},
+	{
+		"group_id" : "G55",
+		"group_name" : "อุปกรณ์เดินท่อ"
+	},
+	{
+		"group_id" : "G56",
+		"group_name" : "อุปกรณ์เคลื่อนย้าย"
+	},
+	{
+		"group_id" : "G57",
+		"group_name" : "อุปกรณ์ทาสีทุกชนิด"
+	},
+	{
+		"group_id" : "G58",
+		"group_name" : "ระบบวาล์วน้ำ"
+	},
+	{
+		"group_id" : "G59",
+		"group_name" : "ยางมะตอย"
+	},
+	{
+		"group_id" : "G61",
+		"group_name" : "เฟอร์นิเจอร์นอกบ้าน"
+	},
+	{
+		"group_id" : "G62",
+		"group_name" : "วัสดุโรงเรือนและอุปกรณ์"
+	},
+	{
+		"group_id" : "G63",
+		"group_name" : "อุปกรณ์เบ็ดเตล็ด"
+	},
+	{
+		"group_id" : "G64",
+		"group_name" : "นั่งร้านและอุปกรณ์"
+	},
+	{
+		"group_id" : "G65",
+		"group_name" : "เครื่องยนต์และเครื่องปั่นไฟ"
+	},
+	{
+		"group_id" : "G66",
+		"group_name" : "เฟอร์นิเจอร์"
+	},
+	{
+		"group_id" : "G67",
+		"group_name" : "หน้าต่างและวงกบ"
+	},
+	{
+		"group_id" : "G68",
+		"group_name" : "อุปกรณ์ประตู"
+	},
+	{
+		"group_id" : "G69",
+		"group_name" : "เบรกเกอร์และตู้ไฟ"
+	},
+	{
+		"group_id" : "G70",
+		"group_name" : "เครื่องมือขัดและอุปกรณ์"
+	},
+	{
+		"group_id" : "G71",
+		"group_name" : "เครื่องมือตัดและอุปกรณ์"
+	},
+	{
+		"group_id" : "G72",
+		"group_name" : "หลอดไฟทุกประเภท"
+	},
+	{
+		"group_id" : "G73",
+		"group_name" : "ระบบโซล่าเซลล์"
+	}
+]

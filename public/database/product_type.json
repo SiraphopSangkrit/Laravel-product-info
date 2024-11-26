@@ -1,0 +1,58 @@
+[
+	{
+		"producttype_id" : "P01",
+		"producttype_name" : "งานโครงสร้าง"
+	},
+	{
+		"producttype_id" : "P13",
+		"producttype_name" : "ประตู-หน้าต่าง"
+	},
+	{
+		"producttype_id" : "P03",
+		"producttype_name" : "สีและเคมีภัณฑ์"
+	},
+	{
+		"producttype_id" : "P04",
+		"producttype_name" : "งานระบบไฟฟ้า"
+	},
+	{
+		"producttype_id" : "P05",
+		"producttype_name" : "งานระบบประปา"
+	},
+	{
+		"producttype_id" : "P06",
+		"producttype_name" : "อุปกรณ์ตกแต่งบ้านและสวน"
+	},
+	{
+		"producttype_id" : "P07",
+		"producttype_name" : "ห้องน้ำและสุขภัณฑ์"
+	},
+	{
+		"producttype_id" : "P08",
+		"producttype_name" : "อุปกรณ์เซฟตี้+ดับเพลิง"
+	},
+	{
+		"producttype_id" : "P09",
+		"producttype_name" : "เครื่องมือช่างทั่วไป"
+	},
+	{
+		"producttype_id" : "P10",
+		"producttype_name" : "สินค้ากลุ่มโรงงานและเครื่องมือก่อสร้าง"
+	},
+	{
+		"producttype_id" : "P11",
+		"producttype_name" : "อุุปกรณ์ยึดติด"
+	},
+	{
+		"producttype_id" : "P12",
+		"producttype_name" : "เครื่องมือช่างไฟฟ้า"
+	},
+	{
+		"producttype_id" : "P14",
+		"producttype_name" : "เครื่องใช้ไฟฟ้า"
+	},
+	{
+		"producttype_id" : "P16",
+		"producttype_name" : "อะไหล่เครื่องยนต์"
+	}
+]

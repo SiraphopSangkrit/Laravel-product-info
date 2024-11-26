@@ -1,6 +1,6 @@
 import "../css/app.css";
 import "./bootstrap";
-import { onMounted } from "vue";
+
 import { initFlowbite } from "flowbite";
 import LaravelPermissionToVueJS from "laravel-permission-to-vuejs";
 import { createInertiaApp } from "@inertiajs/vue3";

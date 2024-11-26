@@ -15,12 +15,14 @@ import { Link } from '@inertiajs/vue3';
                 </div>
 
             </div>
-            <header class="bg-white shadow dark:bg-gray-800" v-if="$slots.header">
+            <header class="bg-white shadow dark:bg-gray-800 py-5" v-if="$slots.header" >
                 <div class="mx-auto max-w-7xl ">
                     <div class="flex items-center">
                         <Link :href="route('product.index')">
-                        <ApplicationLogo class="block h-10 w-auto fill-current text-gray-800 dark:text-gray-200">
-                        </ApplicationLogo>
+                        <div>
+                            <h1 class="text-3xl font-semibold">TPPS</h1>
+
+                        </div>
                         </Link>
                         <slot name="header" />
 
@@ -38,6 +40,6 @@ import { Link } from '@inertiajs/vue3';
 
             </div>
         </div>
-        <Footer></Footer>
+
     </div>
 </template>

@@ -1,0 +1,402 @@
+[
+	{
+		"brand_id" : "B01",
+		"brand_name" : "BOSCH"
+	},
+	{
+		"brand_id" : "B02",
+		"brand_name" : "MAKITA"
+	},
+	{
+		"brand_id" : "B03",
+		"brand_name" : "HITACHI"
+	},
+	{
+		"brand_id" : "B04",
+		"brand_name" : "MITSUBISHI"
+	},
+	{
+		"brand_id" : "B05",
+		"brand_name" : "TOTAL"
+	},
+	{
+		"brand_id" : "B06",
+		"brand_name" : "BERALA"
+	},
+	{
+		"brand_id" : "B07",
+		"brand_name" : "STANLEY"
+	},
+	{
+		"brand_id" : "B08",
+		"brand_name" : "SOLO"
+	},
+	{
+		"brand_id" : "B09",
+		"brand_name" : "DOS"
+	},
+	{
+		"brand_id" : "B10",
+		"brand_name" : "LEO"
+	},
+	{
+		"brand_id" : "B11",
+		"brand_name" : "MITSUBOSHI"
+	},
+	{
+		"brand_id" : "B12",
+		"brand_name" : "TOA"
+	},
+	{
+		"brand_id" : "B13",
+		"brand_name" : "LANKO"
+	},
+	{
+		"brand_id" : "B14",
+		"brand_name" : "SIKA"
+	},
+	{
+		"brand_id" : "B15",
+		"brand_name" : "KOBE"
+	},
+	{
+		"brand_id" : "B16",
+		"brand_name" : "LENA"
+	},
+	{
+		"brand_id" : "B17",
+		"brand_name" : "ลายไทย"
+	},
+	{
+		"brand_id" : "B18",
+		"brand_name" : "ASAKI"
+	},
+	{
+		"brand_id" : "B19",
+		"brand_name" : "INGCO"
+	},
+	{
+		"brand_id" : "B20",
+		"brand_name" : "SUNWA"
+	},
+	{
+		"brand_id" : "B21",
+		"brand_name" : "KIT"
+	},
+	{
+		"brand_id" : "B22",
+		"brand_name" : "ATACO"
+	},
+	{
+		"brand_id" : "B23",
+		"brand_name" : "SUMO"
+	},
+	{
+		"brand_id" : "B24",
+		"brand_name" : "SCG"
+	},
+	{
+		"brand_id" : "B25",
+		"brand_name" : "ท่อน้ำไทย"
+	},
+	{
+		"brand_id" : "B26",
+		"brand_name" : "3M"
+	},
+	{
+		"brand_id" : "B27",
+		"brand_name" : "BCC"
+	},
+	{
+		"brand_id" : "B28",
+		"brand_name" : "MAKTEC"
+	},
+	{
+		"brand_id" : "B29",
+		"brand_name" : "SYS"
+	},
+	{
+		"brand_id" : "B30",
+		"brand_name" : "CHAMPION"
+	},
+	{
+		"brand_id" : "B31",
+		"brand_name" : "PANASONIC"
+	},
+	{
+		"brand_id" : "B32",
+		"brand_name" : "PHILLIPS"
+	},
+	{
+		"brand_id" : "B33",
+		"brand_name" : "ตราช้าง"
+	},
+	{
+		"brand_id" : "B34",
+		"brand_name" : "SABER"
+	},
+	{
+		"brand_id" : "B35",
+		"brand_name" : "FIXMAN"
+	},
+	{
+		"brand_id" : "B36",
+		"brand_name" : "ZIMZEEM"
+	},
+	{
+		"brand_id" : "B37",
+		"brand_name" : "อื่นๆ"
+	},
+	{
+		"brand_id" : "B38",
+		"brand_name" : "KING EAGLE"
+	},
+	{
+		"brand_id" : "B39",
+		"brand_name" : "แมวน้ำ"
+	},
+	{
+		"brand_id" : "B40",
+		"brand_name" : "Magiclean"
+	},
+	{
+		"brand_id" : "B41",
+		"brand_name" : "HACO"
+	},
+	{
+		"brand_id" : "B42",
+		"brand_name" : "BEWON"
+	},
+	{
+		"brand_id" : "B43",
+		"brand_name" : "KOSAWA"
+	},
+	{
+		"brand_id" : "B44",
+		"brand_name" : "YAMADA"
+	},
+	{
+		"brand_id" : "B45",
+		"brand_name" : "SAFETY JOGGER"
+	},
+	{
+		"brand_id" : "B46",
+		"brand_name" : "จระเข้"
+	},
+	{
+		"brand_id" : "B47",
+		"brand_name" : "DAVCO"
+	},
+	{
+		"brand_id" : "B48",
+		"brand_name" : "A-HI"
+	},
+	{
+		"brand_id" : "B49",
+		"brand_name" : "TTB Plus"
+	},
+	{
+		"brand_id" : "B50",
+		"brand_name" : "WEBER"
+	},
+	{
+		"brand_id" : "B51",
+		"brand_name" : "ตุ๊กแก"
+	},
+	{
+		"brand_id" : "B52",
+		"brand_name" : "เสือ"
+	},
+	{
+		"brand_id" : "B53",
+		"brand_name" : "TPIPL"
+	},
+	{
+		"brand_id" : "B54",
+		"brand_name" : "ชาละวัน"
+	},
+	{
+		"brand_id" : "B55",
+		"brand_name" : "SCG"
+	},
+	{
+		"brand_id" : "B56",
+		"brand_name" : "RADISON"
+	},
+	{
+		"brand_id" : "B57",
+		"brand_name" : "PIONEER"
+	},
+	{
+		"brand_id" : "B58",
+		"brand_name" : "PUMA"
+	},
+	{
+		"brand_id" : "B59",
+		"brand_name" : "Tirawat Tiger"
+	},
+	{
+		"brand_id" : "B60",
+		"brand_name" : "SATA"
+	},
+	{
+		"brand_id" : "B61",
+		"brand_name" : "WASABI"
+	},
+	{
+		"brand_id" : "B62",
+		"brand_name" : "JET"
+	},
+	{
+		"brand_id" : "B63",
+		"brand_name" : "OMRON"
+	},
+	{
+		"brand_id" : "B64",
+		"brand_name" : "OKURA"
+	},
+	{
+		"brand_id" : "B65",
+		"brand_name" : "VEGARR"
+	},
+	{
+		"brand_id" : "B66",
+		"brand_name" : "KNIGHT"
+	},
+	{
+		"brand_id" : "B67",
+		"brand_name" : "WINTON"
+	},
+	{
+		"brand_id" : "B68",
+		"brand_name" : "KINGTONY"
+	},
+	{
+		"brand_id" : "B69",
+		"brand_name" : "LUCKY PRO"
+	},
+	{
+		"brand_id" : "B70",
+		"brand_name" : "SAWADA"
+	},
+	{
+		"brand_id" : "B73",
+		"brand_name" : "WADFOW"
+	},
+	{
+		"brand_id" : "B72",
+		"brand_name" : "GRUNDFOS"
+	},
+	{
+		"brand_id" : "B74",
+		"brand_name" : "EMTOP"
+	},
+	{
+		"brand_id" : "B75",
+		"brand_name" : "APEX"
+	},
+	{
+		"brand_id" : "B76",
+		"brand_name" : "PHOENIX"
+	},
+	{
+		"brand_id" : "B77",
+		"brand_name" : "KERIDA"
+	},
+	{
+		"brand_id" : "B78",
+		"brand_name" : "KEIBA"
+	},
+	{
+		"brand_id" : "B79",
+		"brand_name" : "Taseto"
+	},
+	{
+		"brand_id" : "B80",
+		"brand_name" : "ICHINEN"
+	},
+	{
+		"brand_id" : "B81",
+		"brand_name" : "Zinsano"
+	},
+	{
+		"brand_id" : "B82",
+		"brand_name" : "POLO"
+	},
+	{
+		"brand_id" : "B83",
+		"brand_name" : "Jasic"
+	},
+	{
+		"brand_id" : "B84",
+		"brand_name" : "Wel-D"
+	},
+	{
+		"brand_id" : "B85",
+		"brand_name" : "Welpro"
+	},
+	{
+		"brand_id" : "B86",
+		"brand_name" : "Megatec"
+	},
+	{
+		"brand_id" : "B87",
+		"brand_name" : "Saber"
+	},
+	{
+		"brand_id" : "B88",
+		"brand_name" : "Bergin"
+	},
+	{
+		"brand_id" : "B89",
+		"brand_name" : "Kaierda"
+	},
+	{
+		"brand_id" : "B90",
+		"brand_name" : "Cliff"
+	},
+	{
+		"brand_id" : "B91",
+		"brand_name" : "HATARI"
+	},
+	{
+		"brand_id" : "B92",
+		"brand_name" : "Towa/Tamada"
+	},
+	{
+		"brand_id" : "B93",
+		"brand_name" : "Lynn"
+	},
+	{
+		"brand_id" : "B94",
+		"brand_name" : "Polywood"
+	},
+	{
+		"brand_id" : "B95",
+		"brand_name" : "พลัง"
+	},
+	{
+		"brand_id" : "B96",
+		"brand_name" : "DAICHI"
+	},
+	{
+		"brand_id" : "B97",
+		"brand_name" : "ALIBABA"
+	},
+	{
+		"brand_id" : "B98",
+		"brand_name" : "LIBERTY"
+	},
+	{
+		"brand_id" : "B99",
+		"brand_name" : "HACHI"
+	},
+	{
+		"brand_id" : "B00",
+		"brand_name" : "Indy"
+	},
+	{
+		"brand_id" : "B101",
+		"brand_name" : "PKS"
+	}
+]

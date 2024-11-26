@@ -56,6 +56,29 @@ const BannerCreate = () => {
     });
 }
 
+const handleDelete = (banner) => {
+    Swal.fire({
+        title: 'ต้องการลบสิ่งนี้หรือไม่?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'ไม่ต้องการ',
+        confirmButtonText: 'ใช่,ฉันต้องการลบ!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.delete(route('admin.banner.delete', {
+                id: banner.banner_id,
+            }));
+            Swal.fire(
+                'Deleted!',
+                'Banner has been deleted.',
+                'success'
+            );
+        }
+    });
+};
+
 const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -97,6 +120,8 @@ try {
 const handleFilePondInit = () => {
 
 }
+
+console.log(props.banners)
 </script>
 <template>
     <AdminLayout>
@@ -128,7 +153,7 @@ const handleFilePondInit = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(banner, index) in banners " :key="index"
+                    <tr v-for="(banner, index) in banners.data " :key="index"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white ">
                             {{ (index + 1) }}
@@ -150,7 +175,7 @@ const handleFilePondInit = () => {
                         </td>
 
                         <td class="px-6 py-4 text-center">
-                            <button
+                            <button @click="handleDelete(banner)"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบแบนเนอร์</button>
                         </td>
                     </tr>
@@ -163,7 +188,7 @@ const handleFilePondInit = () => {
 
             <div class="m-3">
                 <button type="button" @click="CreateModal = false"
-                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-lg w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -180,7 +205,7 @@ const handleFilePondInit = () => {
                         @init="handleFilePondInit" />
 
                     <button type="submit"
-                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มแบนเนอร์</button>
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มแบนเนอร์</button>
                 </form>
             </div>
         </Modal>

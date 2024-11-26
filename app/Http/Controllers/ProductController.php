@@ -8,7 +8,10 @@ use Inertia\Inertia;
 use App\Models\ProductType;
 use App\Models\Products;
 use App\Models\Banners;
+use App\Models\News;
+use App\Models\NewsPics;
 use App\Models\ProductPictures;
+use Spatie\Searchable\Search;
 
 class ProductController extends Controller
 {
@@ -17,10 +20,14 @@ class ProductController extends Controller
 
         $productTypes = ProductType::all();
         $banners = Banners::where('banner_status', 1)->get();
+        $news = News::where('news_status', 1)->with('newsPics')->take(3)->orderBy('created_at', 'desc')->get();
+        $products = Products::where('product_status', 1)->with('productPics')->take(6)->orderBy('created_at','desc')->get();
 
         return Inertia::render('Main/main', [
             'product_types' => $productTypes,
             'banners' => $banners,
+            'news' => $news,
+            'products'=> $products,
         ]);
     }
 
@@ -83,7 +90,7 @@ class ProductController extends Controller
         }
 
 
-        $products = $query->paginate(40);
+        $products = $query->paginate(32);
 
 
         $products->appends([
@@ -113,8 +120,8 @@ class ProductController extends Controller
     public function productDetail(Request $request)
     {
         $product_id = $request->product_id;
-       $product = Products::findOrFail($product_id);
-       $productPic = ProductPictures::where('product_id', $product_id)->get();
+        $product = Products::findOrFail($product_id);
+        $productPic = ProductPictures::where('product_id', $product_id)->get();
         $productTypes = ProductType::all();
         $brand = $product->brands;
         $kind = $product->kinds;
@@ -124,11 +131,57 @@ class ProductController extends Controller
         return Inertia::render('Main/productDetail', [
             'product_types' => $productTypes,
             'product' => $product,
-            'productPic'=> $productPic,
-            'brand' =>$brand,
-            'kind'=> $kind,
-            'group'=> $group,
+            'productPic' => $productPic,
+            'brand' => $brand,
+            'kind' => $kind,
+            'group' => $group,
             'type' => $type,
         ]);
+    }
+    public function newsList(Request $request)
+    {
+        $news = News::where('news_status', 1)->with('newsPics')->orderBy('created_at', 'desc')->paginate(10);
+        $productTypes = ProductType::all();
+
+        return Inertia::render('Main/newsList', [
+            'news' => $news,
+            'product_types' => $productTypes
+        ]);
+    }
+
+    public function newsDetail(Request $request) {
+
+        $newsId = $request->id;
+        $news = News::find($newsId);
+        $newsPicture= NewsPics::where('news_id', $newsId)->get();
+
+
+
+        $productTypes = ProductType::all();
+        return Inertia::render('Main/newsPage', [
+            'news' => $news,
+            'newsPicture' =>$newsPicture,
+            'product_types' => $productTypes
+        ]);
+    }
+
+    public function productSearch(Request $request)
+    {
+        try {
+            // Get the search query
+            $query = $request->input('searchQuery');
+            if (empty($query)) {
+                return response()->json([]);
+            }
+            $results = Products::where('product_name', 'like', "%$query%")->with('productPics')->take(5)->get();
+
+            return response()->json($results);
+        } catch (\Exception $e) {
+            // Log the exception
+            \Log::error('Error in productSearch:', ['error' => $e->getMessage()]);
+
+            // Return an error response
+            return response()->json(['message' => 'An error occurred while searching products.'], 500);
+        }
     }
 }

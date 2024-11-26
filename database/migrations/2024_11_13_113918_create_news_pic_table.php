@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('news_pic', function (Blueprint $table) {
             $table->id('newsPic_id');
-            $table->bigInteger('banner_id')->unsigned();
-            $table->foreign('banner_id')->references('banner_id')->on('banner')->onDelete('cascade');
+            $table->bigInteger('news_id')->unsigned();
+            $table->foreign('news_id')->references('news_id')->on('news')->onDelete('cascade');
             $table->string('asset_url')->nullable();
             $table->string('public_url')->nullable();
             $table->timestamps();

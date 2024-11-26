@@ -1,0 +1,874 @@
+[
+	{
+		"kind_id" : "K01",
+		"kind_name" : "แปรงทาสี,ลูกกลิ้งทาสี"
+	},
+	{
+		"kind_id" : "K02",
+		"kind_name" : "ประแจแหวน-ปากตาย"
+	},
+	{
+		"kind_id" : "K03",
+		"kind_name" : "น้ำยาประสานท่อ"
+	},
+	{
+		"kind_id" : "K04",
+		"kind_name" : "เทปพันเกลียว"
+	},
+	{
+		"kind_id" : "K05",
+		"kind_name" : "ปลั๊กและสวิตซ์ไฟฟ้า"
+	},
+	{
+		"kind_id" : "K07",
+		"kind_name" : "ฝาครอบ/กล่องลอย-ฝัง"
+	},
+	{
+		"kind_id" : "K08",
+		"kind_name" : "เหล็กตัวซี"
+	},
+	{
+		"kind_id" : "K09",
+		"kind_name" : "เหล็กเอชบีม/ไอบีม"
+	},
+	{
+		"kind_id" : "K10",
+		"kind_name" : "เหล็กฉาก"
+	},
+	{
+		"kind_id" : "K11",
+		"kind_name" : "แป๊ปแบน"
+	},
+	{
+		"kind_id" : "K12",
+		"kind_name" : "เหล็กแป๊ปกลมดำ"
+	},
+	{
+		"kind_id" : "K13",
+		"kind_name" : "แป๊ปโปร่ง"
+	},
+	{
+		"kind_id" : "K14",
+		"kind_name" : "เหล็กสี่เหลี่ยมตัน"
+	},
+	{
+		"kind_id" : "K15",
+		"kind_name" : "เหล็กเพลา"
+	},
+	{
+		"kind_id" : "K16",
+		"kind_name" : "เหล็กรางหนา"
+	},
+	{
+		"kind_id" : "K17",
+		"kind_name" : "เหล็กปลอก"
+	},
+	{
+		"kind_id" : "K18",
+		"kind_name" : "เสาเอ็นทับหลัง"
+	},
+	{
+		"kind_id" : "K19",
+		"kind_name" : "สเก็นต่างๆ"
+	},
+	{
+		"kind_id" : "K20",
+		"kind_name" : "ถังบำบัดน้ำเสีย"
+	},
+	{
+		"kind_id" : "K21",
+		"kind_name" : "ถังเก็บน้ำ"
+	},
+	{
+		"kind_id" : "K22",
+		"kind_name" : "รองเท้าเซฟตี้"
+	},
+	{
+		"kind_id" : "K23",
+		"kind_name" : "เกียงก่อ/เกียงฉาบ"
+	},
+	{
+		"kind_id" : "K24",
+		"kind_name" : "THW"
+	},
+	{
+		"kind_id" : "K58",
+		"kind_name" : "ปั๊มลม"
+	},
+	{
+		"kind_id" : "K57",
+		"kind_name" : "มอเตอร์"
+	},
+	{
+		"kind_id" : "K56",
+		"kind_name" : "ปูนทุกประเภท"
+	},
+	{
+		"kind_id" : "K29",
+		"kind_name" : "วาล์ว"
+	},
+	{
+		"kind_id" : "K30",
+		"kind_name" : "ฝักบัว"
+	},
+	{
+		"kind_id" : "K31",
+		"kind_name" : "สายฉีดชำระ"
+	},
+	{
+		"kind_id" : "K32",
+		"kind_name" : "สายน้ำดี"
+	},
+	{
+		"kind_id" : "K33",
+		"kind_name" : "ก๊อกน้ำ"
+	},
+	{
+		"kind_id" : "K34",
+		"kind_name" : "อ่างซิงค์"
+	},
+	{
+		"kind_id" : "K35",
+		"kind_name" : "ท่อน้ำทิ้ง"
+	},
+	{
+		"kind_id" : "K36",
+		"kind_name" : "ชักโครก"
+	},
+	{
+		"kind_id" : "K37",
+		"kind_name" : "ลูกบล็อค"
+	},
+	{
+		"kind_id" : "K38",
+		"kind_name" : "ค้อน,ขวาน,สิ่ว,ตะไบ,คีม"
+	},
+	{
+		"kind_id" : "K39",
+		"kind_name" : "อุปกรณ์ในห้องน้ำ"
+	},
+	{
+		"kind_id" : "K40",
+		"kind_name" : "เหล็กรูป"
+	},
+	{
+		"kind_id" : "K41",
+		"kind_name" : "ลวด"
+	},
+	{
+		"kind_id" : "K42",
+		"kind_name" : "ตะปู"
+	},
+	{
+		"kind_id" : "K43",
+		"kind_name" : "สายยางรดน้ำ"
+	},
+	{
+		"kind_id" : "K44",
+		"kind_name" : "กระดาษทราย"
+	},
+	{
+		"kind_id" : "K45",
+		"kind_name" : "ตาข่าย"
+	},
+	{
+		"kind_id" : "K46",
+		"kind_name" : "สายพาน"
+	},
+	{
+		"kind_id" : "K47",
+		"kind_name" : "ประแจ"
+	},
+	{
+		"kind_id" : "K48",
+		"kind_name" : "มีดและกรรไกร"
+	},
+	{
+		"kind_id" : "K49",
+		"kind_name" : "เหล็กแผ่นลาย"
+	},
+	{
+		"kind_id" : "K50",
+		"kind_name" : "แป๊ปสแตนเลส/เหล็กเพลาขาว"
+	},
+	{
+		"kind_id" : "K52",
+		"kind_name" : "เครื่องยนต์"
+	},
+	{
+		"kind_id" : "K54",
+		"kind_name" : "ระดับน้ำ"
+	},
+	{
+		"kind_id" : "K55",
+		"kind_name" : "เพรสเชอร์และรีเลย์"
+	},
+	{
+		"kind_id" : "K59",
+		"kind_name" : "ปั๊มหอยโข่ง"
+	},
+	{
+		"kind_id" : "K60",
+		"kind_name" : "สี"
+	},
+	{
+		"kind_id" : "K61",
+		"kind_name" : "เบรกเกอร์และเซอร์กิต"
+	},
+	{
+		"kind_id" : "K62",
+		"kind_name" : "เทปวัดระยะ"
+	},
+	{
+		"kind_id" : "K63",
+		"kind_name" : "ฟิวส์และสวิตซ์ไฟฟ้า"
+	},
+	{
+		"kind_id" : "K26",
+		"kind_name" : "ไม้อัดยาง"
+	},
+	{
+		"kind_id" : "K65",
+		"kind_name" : "หางปลา"
+	},
+	{
+		"kind_id" : "K66",
+		"kind_name" : "อุปกรณ์ไฟฟ้า"
+	},
+	{
+		"kind_id" : "K67",
+		"kind_name" : "ต๊าป"
+	},
+	{
+		"kind_id" : "K68",
+		"kind_name" : "VAF"
+	},
+	{
+		"kind_id" : "K69",
+		"kind_name" : "เครื่องเชื่อมและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K25",
+		"kind_name" : "ไม้อัดเคลือบฟิล์ม"
+	},
+	{
+		"kind_id" : "K71",
+		"kind_name" : "อุปกรณ์ช่างทั่วไป"
+	},
+	{
+		"kind_id" : "K72",
+		"kind_name" : "พัดลม"
+	},
+	{
+		"kind_id" : "K73",
+		"kind_name" : "ประตู"
+	},
+	{
+		"kind_id" : "K74",
+		"kind_name" : "ตลับเมตร"
+	},
+	{
+		"kind_id" : "K75",
+		"kind_name" : "น้ำยาซักผ้า / ปรับผ้านุ่ม / น้ำยาทำความสะอาด"
+	},
+	{
+		"kind_id" : "K76",
+		"kind_name" : "มูเล่ย์"
+	},
+	{
+		"kind_id" : "K78",
+		"kind_name" : "ล้อ"
+	},
+	{
+		"kind_id" : "K77",
+		"kind_name" : "กุญแจ"
+	},
+	{
+		"kind_id" : "K79",
+		"kind_name" : "อุปกรณ์จราจร"
+	},
+	{
+		"kind_id" : "K80",
+		"kind_name" : "ยางยอย"
+	},
+	{
+		"kind_id" : "K81",
+		"kind_name" : "ปั๊มเฟือง"
+	},
+	{
+		"kind_id" : "K82",
+		"kind_name" : "ดอกสว่านเจาะ/ขัด/เจียร"
+	},
+	{
+		"kind_id" : "K83",
+		"kind_name" : "สว่านแท่นและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K84",
+		"kind_name" : "เลื่อยวงเดือนและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K85",
+		"kind_name" : "เลื่อยจิ๊กซอว์"
+	},
+	{
+		"kind_id" : "K86",
+		"kind_name" : "สว่านและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K87",
+		"kind_name" : "น้ำยาตรวจสอบรอยร้าว"
+	},
+	{
+		"kind_id" : "K88",
+		"kind_name" : "เช็ควาล์ว"
+	},
+	{
+		"kind_id" : "K89",
+		"kind_name" : "เหล็กเส้นอ้อย"
+	},
+	{
+		"kind_id" : "K90",
+		"kind_name" : "เหล็กเส้นกลม"
+	},
+	{
+		"kind_id" : "K91",
+		"kind_name" : "ตะแกรงวายเมช"
+	},
+	{
+		"kind_id" : "K92",
+		"kind_name" : "แป๊ปโปร่งกัลวาไนซ์"
+	},
+	{
+		"kind_id" : "K93",
+		"kind_name" : "ยางมะตอย"
+	},
+	{
+		"kind_id" : "K94",
+		"kind_name" : "ทับหลัง"
+	},
+	{
+		"kind_id" : "K95",
+		"kind_name" : "แป๊ปแบนกัลวาไนท์"
+	},
+	{
+		"kind_id" : "K96",
+		"kind_name" : "เหล็กแบน"
+	},
+	{
+		"kind_id" : "K97",
+		"kind_name" : "เหล็กสี่เหลี่ยมตัน"
+	},
+	{
+		"kind_id" : "K98",
+		"kind_name" : "แผ่นอลูมิเนียม"
+	},
+	{
+		"kind_id" : "K99",
+		"kind_name" : "สมาร์ทบอร์ด"
+	},
+	{
+		"kind_id" : "K00",
+		"kind_name" : "ไม้ระแนง"
+	},
+	{
+		"kind_id" : "K102",
+		"kind_name" : "ก๊อกอ่างล้างหน้า"
+	},
+	{
+		"kind_id" : "K27",
+		"kind_name" : "ไม้ฝาสมาร์ทวูด"
+	},
+	{
+		"kind_id" : "K100",
+		"kind_name" : "ก๊อกซิงค์"
+	},
+	{
+		"kind_id" : "K101",
+		"kind_name" : "ราวมือจับ"
+	},
+	{
+		"kind_id" : "K103",
+		"kind_name" : "ฝาครอบปลั๊กและสวิซ์"
+	},
+	{
+		"kind_id" : "K104",
+		"kind_name" : "ปลั๊กไฟ/รางปลั๊กไฟ"
+	},
+	{
+		"kind_id" : "K105",
+		"kind_name" : "ฝาส้วม"
+	},
+	{
+		"kind_id" : "K106",
+		"kind_name" : "พัดลมอุตสาหกรรม"
+	},
+	{
+		"kind_id" : "K107",
+		"kind_name" : "รองเท้าบู๊ท"
+	},
+	{
+		"kind_id" : "K108",
+		"kind_name" : "ปูนซีเมนต์"
+	},
+	{
+		"kind_id" : "K109",
+		"kind_name" : "ปูนฉาบ"
+	},
+	{
+		"kind_id" : "K110",
+		"kind_name" : "ปูนก่อ"
+	},
+	{
+		"kind_id" : "K111",
+		"kind_name" : "เครื่องตัดหญ้า"
+	},
+	{
+		"kind_id" : "K112",
+		"kind_name" : "อะไหล่และอุปกรณ์ตัดหญ้า"
+	},
+	{
+		"kind_id" : "K113",
+		"kind_name" : "ชั้นเข้ามุม"
+	},
+	{
+		"kind_id" : "K114",
+		"kind_name" : "อุปกรณ์ขุดดิน"
+	},
+	{
+		"kind_id" : "K115",
+		"kind_name" : "เครื่องและถังพ่นยา"
+	},
+	{
+		"kind_id" : "K116",
+		"kind_name" : "วัสดุกันแดด/กันฝุ่น"
+	},
+	{
+		"kind_id" : "K117",
+		"kind_name" : "สปริงเกอร์และอุปกรณ์"
+	},
+	{
+		"kind_id" : "K118",
+		"kind_name" : "อุปกรณ์ตัดแต่ง"
+	},
+	{
+		"kind_id" : "K119",
+		"kind_name" : "แป๊ปกลม"
+	},
+	{
+		"kind_id" : "K120",
+		"kind_name" : "คีมคอม้า-ประแจเลื่อน"
+	},
+	{
+		"kind_id" : "K121",
+		"kind_name" : "อุปกรณ์ทางท่ออื่นๆ"
+	},
+	{
+		"kind_id" : "K122",
+		"kind_name" : "ระบบน้ำหยด"
+	},
+	{
+		"kind_id" : "K123",
+		"kind_name" : "หมวกนิรภัย"
+	},
+	{
+		"kind_id" : "K124",
+		"kind_name" : "มีดกลึง"
+	},
+	{
+		"kind_id" : "K125",
+		"kind_name" : "เสาค้ำยัน"
+	},
+	{
+		"kind_id" : "K126",
+		"kind_name" : "ตะแกรงทางเดิน"
+	},
+	{
+		"kind_id" : "K127",
+		"kind_name" : "ปั๊มออโต้"
+	},
+	{
+		"kind_id" : "K128",
+		"kind_name" : "ปั๊มไดโว่"
+	},
+	{
+		"kind_id" : "K129",
+		"kind_name" : "ปั๊มซัมเมิท"
+	},
+	{
+		"kind_id" : "K130",
+		"kind_name" : "ปั๊มเจ็ทเดี่ยว"
+	},
+	{
+		"kind_id" : "K131",
+		"kind_name" : "ปั๊มคาโต้"
+	},
+	{
+		"kind_id" : "K132",
+		"kind_name" : "ปั๊มจ่ายสารคลอรีน"
+	},
+	{
+		"kind_id" : "K133",
+		"kind_name" : "ปั๊มไดโว่ดูดโคลน"
+	},
+	{
+		"kind_id" : "K134",
+		"kind_name" : "ปั๊ม Booster"
+	},
+	{
+		"kind_id" : "K135",
+		"kind_name" : "ปั๊มเจ็ท"
+	},
+	{
+		"kind_id" : "K136",
+		"kind_name" : "ไม้กวาด/ถังขยะ"
+	},
+	{
+		"kind_id" : "K137",
+		"kind_name" : "ถังปั๊มน้ำ"
+	},
+	{
+		"kind_id" : "K138",
+		"kind_name" : "ปั๊มชนเครื่อง"
+	},
+	{
+		"kind_id" : "K139",
+		"kind_name" : "ลูกปืน"
+	},
+	{
+		"kind_id" : "K140",
+		"kind_name" : "ท่อเฟล็กยูเนียน"
+	},
+	{
+		"kind_id" : "K141",
+		"kind_name" : "บอลวาล์ว"
+	},
+	{
+		"kind_id" : "K142",
+		"kind_name" : "ท่อพีวีซี,ท่อพีบี,ท่อพีพีอาร์"
+	},
+	{
+		"kind_id" : "K143",
+		"kind_name" : "เครื่องสูบน้ำ"
+	},
+	{
+		"kind_id" : "K144",
+		"kind_name" : "หน้าจาน"
+	},
+	{
+		"kind_id" : "K145",
+		"kind_name" : "ประตูน้ำ"
+	},
+	{
+		"kind_id" : "K146",
+		"kind_name" : "ลูกลอย"
+	},
+	{
+		"kind_id" : "K147",
+		"kind_name" : "เครื่องยนต์ดีเซล/เบนซิน"
+	},
+	{
+		"kind_id" : "K148",
+		"kind_name" : "มิเตอร์"
+	},
+	{
+		"kind_id" : "K149",
+		"kind_name" : "เฟอร์นิเจอร์ภายในบ้าน"
+	},
+	{
+		"kind_id" : "K150",
+		"kind_name" : "วงกบ"
+	},
+	{
+		"kind_id" : "K151",
+		"kind_name" : "ท่ออ่อน/ท่อร้อยสาย"
+	},
+	{
+		"kind_id" : "K152",
+		"kind_name" : "คลิปก้ามปู"
+	},
+	{
+		"kind_id" : "K153",
+		"kind_name" : "กล่องพักสาย"
+	},
+	{
+		"kind_id" : "K154",
+		"kind_name" : "หน้าต่าง"
+	},
+	{
+		"kind_id" : "K155",
+		"kind_name" : "ยางกันซึม"
+	},
+	{
+		"kind_id" : "K157",
+		"kind_name" : "กลอนประตู"
+	},
+	{
+		"kind_id" : "K158",
+		"kind_name" : "ลูกบิดประตู"
+	},
+	{
+		"kind_id" : "K159",
+		"kind_name" : "คิ้ว"
+	},
+	{
+		"kind_id" : "K160",
+		"kind_name" : "หน้าต่าง UPVC"
+	},
+	{
+		"kind_id" : "K161",
+		"kind_name" : "หน้าต่างไวนิล"
+	},
+	{
+		"kind_id" : "K162",
+		"kind_name" : "หน้าต่างอลูมิเนียม"
+	},
+	{
+		"kind_id" : "K163",
+		"kind_name" : "พุ๊กทุกชนิด"
+	},
+	{
+		"kind_id" : "K164",
+		"kind_name" : "โถปัสสาวะชาย"
+	},
+	{
+		"kind_id" : "K165",
+		"kind_name" : "เลื่อยมือ,เลื่อยคันธนู"
+	},
+	{
+		"kind_id" : "K166",
+		"kind_name" : "เครื่องขัดกระดาษทรายและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K167",
+		"kind_name" : "ปืนยิงกาวและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K168",
+		"kind_name" : "บันได"
+	},
+	{
+		"kind_id" : "K169",
+		"kind_name" : "ปากกาจับชิ้นงาน"
+	},
+	{
+		"kind_id" : "K170",
+		"kind_name" : "ปากกาตัว C"
+	},
+	{
+		"kind_id" : "K171",
+		"kind_name" : "ยาแนว"
+	},
+	{
+		"kind_id" : "K172",
+		"kind_name" : "ท่อชาร์ป"
+	},
+	{
+		"kind_id" : "K173",
+		"kind_name" : "ปุ๋ย/อีเอ็ม/กากน้ำตาล"
+	},
+	{
+		"kind_id" : "K174",
+		"kind_name" : "เลื่อยและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K175",
+		"kind_name" : "น๊อต"
+	},
+	{
+		"kind_id" : "K176",
+		"kind_name" : "สกรู"
+	},
+	{
+		"kind_id" : "K177",
+		"kind_name" : "ยีโบท์"
+	},
+	{
+		"kind_id" : "K178",
+		"kind_name" : "สตัดเกลียว"
+	},
+	{
+		"kind_id" : "K179",
+		"kind_name" : "ดอกรีเวท"
+	},
+	{
+		"kind_id" : "K180",
+		"kind_name" : "แค้มรัดท่อทุกชนิด"
+	},
+	{
+		"kind_id" : "K181",
+		"kind_name" : "ข้อต่อโซ่"
+	},
+	{
+		"kind_id" : "K182",
+		"kind_name" : "ประตู UPVC"
+	},
+	{
+		"kind_id" : "K183",
+		"kind_name" : "ประตู ABS"
+	},
+	{
+		"kind_id" : "K184",
+		"kind_name" : "ประตู PVC"
+	},
+	{
+		"kind_id" : "K185",
+		"kind_name" : "ประตู WPC"
+	},
+	{
+		"kind_id" : "K186",
+		"kind_name" : "มือจับประตู"
+	},
+	{
+		"kind_id" : "K187",
+		"kind_name" : "เหล็กดัด"
+	},
+	{
+		"kind_id" : "K188",
+		"kind_name" : "ขอรับขอสับ"
+	},
+	{
+		"kind_id" : "K189",
+		"kind_name" : "บานเกล็ดและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K190",
+		"kind_name" : "แว่นตา"
+	},
+	{
+		"kind_id" : "K191",
+		"kind_name" : "กรวยจราจร"
+	},
+	{
+		"kind_id" : "K192",
+		"kind_name" : "ที่ปิดจมูก"
+	},
+	{
+		"kind_id" : "K193",
+		"kind_name" : "ชุดดับเพลิง"
+	},
+	{
+		"kind_id" : "K194",
+		"kind_name" : "กระบองไฟ"
+	},
+	{
+		"kind_id" : "K195",
+		"kind_name" : "หน้ากากเชื่อม"
+	},
+	{
+		"kind_id" : "K196",
+		"kind_name" : "ตู้ดับเพลิงและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K197",
+		"kind_name" : "เสื้อสะท้อน"
+	},
+	{
+		"kind_id" : "K198",
+		"kind_name" : "หลอดกลม"
+	},
+	{
+		"kind_id" : "K199",
+		"kind_name" : "หลอดตะเกียบ"
+	},
+	{
+		"kind_id" : "K200",
+		"kind_name" : "หลอดทอร์นาโด"
+	},
+	{
+		"kind_id" : "K201",
+		"kind_name" : "หลอดนีออน"
+	},
+	{
+		"kind_id" : "K202",
+		"kind_name" : "แผงโซล่าเซลล์"
+	},
+	{
+		"kind_id" : "K203",
+		"kind_name" : "อุปกรณ์โซล่าเซลล์"
+	},
+	{
+		"kind_id" : "K204",
+		"kind_name" : "นั่งร้านและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K205",
+		"kind_name" : "THW-A"
+	},
+	{
+		"kind_id" : "K206",
+		"kind_name" : "VCT"
+	},
+	{
+		"kind_id" : "K207",
+		"kind_name" : "บราวโว่,ท่อลม"
+	},
+	{
+		"kind_id" : "K208",
+		"kind_name" : "ดอกเอ็นมิล,ดอกนำศูนย์"
+	},
+	{
+		"kind_id" : "K209",
+		"kind_name" : "กบมือ,สว่านมือหมุนและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K210",
+		"kind_name" : "ใบขัดกระดาษทราย"
+	},
+	{
+		"kind_id" : "K211",
+		"kind_name" : "ล้อทราย"
+	},
+	{
+		"kind_id" : "K212",
+		"kind_name" : "ดินสอขีดไม้"
+	},
+	{
+		"kind_id" : "K213",
+		"kind_name" : "เครื่องตัดเหล็กแหละอุปกรณ์"
+	},
+	{
+		"kind_id" : "K214",
+		"kind_name" : "เครื่องตัดกระเบื้องและอุปกรณ์"
+	},
+	{
+		"kind_id" : "K215",
+		"kind_name" : "ปูนกาว"
+	},
+	{
+		"kind_id" : "K216",
+		"kind_name" : "วัสดุอุดรอยรั่ว"
+	},
+	{
+		"kind_id" : "K217",
+		"kind_name" : "วัสดุกันซึม"
+	},
+	{
+		"kind_id" : "K218",
+		"kind_name" : "ซิลิโคน,ปืนยิงซิลิโคน"
+	},
+	{
+		"kind_id" : "K219",
+		"kind_name" : "หมั่นโป๊ว"
+	},
+	{
+		"kind_id" : "K220",
+		"kind_name" : "เครื่องตบดินและอะไหล่"
+	},
+	{
+		"kind_id" : "K221",
+		"kind_name" : "เครื่องจี้ปูน"
+	},
+	{
+		"kind_id" : "K222",
+		"kind_name" : "เครื่องปาดปูน"
+	},
+	{
+		"kind_id" : "K223",
+		"kind_name" : "เครื่องผสมปูน"
+	},
+	{
+		"kind_id" : "K224",
+		"kind_name" : "เครื่องตัดคอนกรีต"
+	}
+]

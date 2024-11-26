@@ -33,9 +33,12 @@ class AdminController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where('product_name', 'LIKE', "%{$search}%")
                     ->orWhere('product_id', 'LIKE', "%{$search}%")
-                    ->orWhereHas('brands', fn($q) => $q->where('brand_name', 'LIKE', "%{$search}%"));
+                    ->orWhereHas('brands', fn($q) => $q->where('brand_name', 'LIKE', "%{$search}%"))
+                    ->orWhereHas('groups', fn($q) => $q->where('group_name', 'LIKE', "%{$search}%"))
+                    ->orWhereHas('kinds', fn($q) => $q->where('kind_name', 'LIKE', "%{$search}%"))
+                    ->orWhereHas('types', fn($q) => $q->where('producttype_name', 'LIKE', "%{$search}%"));
             })
-            ->orderBy('producttype_id', 'asc')
+            ->orderBy('product_id', 'desc')
             ->paginate(36)->withQueryString();
 
 
@@ -126,10 +129,20 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+    public function deleteProduct(Request $request)
+    {
+
+        $productId = $request->id;
+        $product = Products::findOrFail($productId);
+        $product->delete();
+
+
+        return redirect()->back();
+    }
 
 
 
-    public function addPictures(Request $request)
+    public function addProductPictures(Request $request)
     {
 
         $product_id = $request->product_id;
@@ -164,22 +177,75 @@ class AdminController extends Controller
 
     public function productBrand(Request $request)
     {
-        $productBrands = Brands::orderBy('brand_id')->paginate(10);
+        $search = $request->input('search');
+        $productBrands = Brands::query()
+            ->when($search, function ($query, $search) {
+                $query->where('brand_id', 'LIKE', "%{$search}%")
+                    ->orWhere('brand_name', 'LIKE', "%{$search}%");
+            })
+            ->orderBy('brand_id', 'asc')
+            ->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/ProductBrands', [
-            'productBrands' => $productBrands
+            'productBrands' => $productBrands,
+            'search' => $search
         ]);
     }
 
+    public function productBrandCreate(Request $request)
+    {
+        $request->validate([
+            'brand_id' => 'required|unique:brand|max:5'
+        ], [
+
+            'brand_id.required' => 'กรุณาใส่รหัสแบรนด์สินค้า.',
+            'brand_id.unique' => 'รหัสแบรนด์สินค้าซ้ำ กรุณาใส่รหัสแบรนด์สินค้าใหม่.',
+            'brand_id.max' => 'ใส่รหัสแบรนด์สินค้าได้ไม่เกิน 5 ตัว.',
+
+        ]);
+
+        $productBrand = Brands::create([
+            'brand_id' => $request->brand_id,
+            'brand_name' => $request->brand_name,
+        ]);
+
+
+        return redirect()->back();
+    }
+    public function productBrandUpdate(Request $request, $id)
+    {
+        $productBrand = Brands::find($id);
+        $productBrand->brand_name = $request->brand_name;
+        $productBrand->save();
+
+        return redirect()->back();
+    }
+    public function productBrandDelete(Request $request, $id)
+    {
+
+        $productBrand = Brands::find($id);
+        $productBrand->delete();
+
+        return redirect()->back();
+    }
     public function productType(Request $request)
     {
-        $productTypes = ProductType::orderBy('producttype_id')->paginate(6);
+        $search = $request->input('search');
+        $productTypes = ProductType::query()
+            ->when($search, function ($query, $search) {
+                $query->where('producttype_id', 'LIKE', "%{$search}%")
+                    ->orWhere('producttype_name', 'LIKE', "%{$search}%");
+            })
+            ->orderBy('producttype_id', 'asc')
+            ->paginate(6)->withQueryString();
+
 
         return Inertia::render('Admin/ProductType', [
-            'productTypes' => $productTypes
+            'productTypes' => $productTypes,
+            'search' => $search
         ]);
     }
-    public function productTypeCrete(Request $request)
+    public function productTypeCreate(Request $request)
     {
         $request->validate([
             'producttype_id' => 'required|unique:product_type|max:5'
@@ -200,10 +266,9 @@ class AdminController extends Controller
     }
     public function productTypeUpdate(Request $request)
     {
-        $productTypeId = $request->producttype_id_edit;
+        $productTypeId = $request->producttype_id;
         $productType = ProductType::find($productTypeId);
-
-        $productType->producttype_name = $request->producttype_name_edit;
+        $productType->producttype_name = $request->producttype_name;
         $productType->save();
 
         return redirect()->back();
@@ -218,7 +283,14 @@ class AdminController extends Controller
 
     public function productGroup(Request $request)
     {
-        $productGroups = Group::orderBy('group_id')->paginate(10);
+        $search = $request->input('search');
+        $productGroups = Group::query()
+            ->when($search, function ($query, $search) {
+                $query->where('group_id', 'LIKE', "%{$search}%")
+                    ->orWhere('group_name', 'LIKE', "%{$search}%");
+            })
+            ->orderBy('group_id', 'asc')
+            ->paginate(10)->withQueryString();
 
         return Inertia::render('Admin/ProductGroups', [
             'productGroups' => $productGroups
@@ -246,13 +318,14 @@ class AdminController extends Controller
     }
     public function productGroupUpdate(Request $request)
     {
-        $groupId = $request->group_id_edit;
+        $groupId = $request->group_id;
         $group = Group::find($groupId);
-        $group->group_name = $request->group_name_edit;
+        $group->group_name = $request->group_name;
         $group->save();
 
         return redirect()->back();
     }
+
     public function productGroupDelete(Request $request, $id)
     {
         $group = Group::find($id);
@@ -262,10 +335,18 @@ class AdminController extends Controller
     }
     public function productKind(Request $request)
     {
-        $productKinds = Kind::orderBy('kind_id')->paginate(15);
+        $search = $request->input('search');
+        $productKinds = Kind::query()
+            ->when($search, function ($query, $search) {
+                $query->where('kind_id', 'LIKE', "%{$search}%")
+                    ->orWhere('kind_name', 'LIKE', "%{$search}%");
+            })
+            ->orderBy('kind_id', 'asc')
+            ->paginate(15)->withQueryString();
 
         return Inertia::render('Admin/ProductKind', [
-            'productKinds' => $productKinds
+            'productKinds' => $productKinds,
+            'search' => $search
         ]);
     }
 
@@ -294,9 +375,9 @@ class AdminController extends Controller
     public function productKindUpdate(Request $request)
     {
 
-        $kindId =  $request->kind_id_edit;
+        $kindId =  $request->kind_id;
         $kind = Kind::find();
-        $kind->kind_name = $request->kind_name_edit;
+        $kind->kind_name = $request->kind_name;
         $kind->save();
 
         return redirect()->back();
@@ -312,7 +393,7 @@ class AdminController extends Controller
 
     public function Banner(Request $request)
     {
-        $banners = Banners::all();
+        $banners = Banners::orderBy('created_at')->paginate(10);
 
         return Inertia::render('Admin/Banner', ['banners' => $banners]);
     }
@@ -337,10 +418,31 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function bannerDelete(Request $request, $id)
+    {
+
+        $picture = Banners::find($id);
+
+        if ($picture) {
+            Storage::disk('public')->delete($picture->asset_url);
+            $picture->delete();
+        }
+
+        return redirect()->back();
+    }
     public function News(Request $request)
     {
-        $news = News::all();
-        return Inertia::render('Admin/News', ['News' => $news]);
+        $search = $request->input('search');
+        $news = News::query()->with('newsPics')
+            ->when($search, function ($query, $search) {
+                $query->where('news_name', 'LIKE', "%{$search}%")
+                    ->orWhere('news_desc', 'LIKE', "%{$search}%");
+            })
+            ->orderBy('news_id', 'asc')
+            ->paginate(10)->withQueryString();
+
+        return Inertia::render('Admin/News', ['News' => $news,'search' =>$search]);
     }
 
     public function NewsCreate(Request $request)
@@ -358,19 +460,38 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function NewsPicAdd(Request $request)
+    public function addNewsPictures(Request $request)
     {
         $news_id = $request->news_id;
 
         $images = $request->file('image');
 
         foreach ($images as $image) {
-            $newsPic = new ProductPictures;
-            $newsPic->product_id = $news_id;
+            $newsPic = new NewsPics;
+            $newsPic->news_id = $news_id;
             $picture_path = $image->store('news_image', 'public');
             $newsPic->asset_url = $picture_path;
             $newsPic->public_url = $picture_path;
             $newsPic->save();
+        }
+        return redirect()->back();
+    }
+
+    public function NewsDelete(Request $request, $id)
+    {
+        $news = News::findOrFail($id);
+        $news->delete();
+
+        return redirect()->back();
+    }
+
+    public function deleteNewsPictures(Request $request, $id)
+    {
+        $picture = NewsPics::find($id);
+
+        if ($picture) {
+            Storage::disk('public')->delete($picture->asset_url);
+            $picture->delete();
         }
         return redirect()->back();
     }
@@ -387,7 +508,7 @@ class AdminController extends Controller
     public function userAdmin(Request $request)
     {
 
-        $adminUsers = User::role('superadmin')->get();
+        $adminUsers = User::role('admin')->get();
 
 
         return Inertia::render('Admin/User', [
@@ -420,6 +541,16 @@ class AdminController extends Controller
         $admin->password = bcrypt('tppsadmin1234');
         $admin->assignRole('admin');
         $admin->save();
+
+        return redirect()->back();
+    }
+
+    public function userAdminDelete(Request $request)
+    {
+
+        $admin = User::findOrFail($request->id);
+        $admin->delete();
+
 
         return redirect()->back();
     }

@@ -109,7 +109,6 @@ const AddImage = () => {
                 });
             },
             onError: () => {
-                handleClose();
                 Toast.fire({
                     icon: "error",
                     title: "เพิ่มรูปสินค้าไม่สำเร็จ"
@@ -127,7 +126,7 @@ const ProductImgDelete = ($ProductPicId) => {
             });
         },
         onError: () => {
-            handleClose();
+
             Toast.fire({
                 icon: "error",
                 title: "ลบรูปสินค้าไม่สำเร็จ"
@@ -147,7 +146,6 @@ const ProductCreate = () => {
             });
         },
         onError: () => {
-            handleClose();
             Toast.fire({
                 icon: "error",
                 title: "เพิ่มข้อมูลสินค้าไม่สำเร็จ"
@@ -168,7 +166,6 @@ const ProductUpdate = () => {
             });
         },
         onError: () => {
-            handleClose();
             Toast.fire({
                 icon: "error",
                 title: "อัพเดตข้อมูลสินค้าไม่สำเร็จ"
@@ -203,6 +200,29 @@ const toggleProductStatus = (product) => {
             title: "อัพเดตสเตตัสไม่สำเร็จ"
         });
     }
+};
+
+const handleDelete = (product) => {
+    Swal.fire({
+        title: 'ต้องการลบสิ่งนี้หรือไม่?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'ไม่ต้องการ',
+        confirmButtonText: 'ใช่,ฉันต้องการลบ!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            router.delete(route('admin.deleteProduct', {
+                id: product.product_id,
+            }));
+            Swal.fire(
+                'Deleted!',
+                'Product has been deleted.',
+                'success'
+            );
+        }
+    });
 };
 
 const Toast = Swal.mixin({
@@ -265,7 +285,7 @@ watch(
 
         <div class="w-1/3 my-5">
             <label for="default-search"
-                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                class="mb-2 text-lg  font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -275,12 +295,12 @@ watch(
                     </svg>
                 </div>
                 <input type="search" id="default-search" v-model="searchQuery"
-                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="block w-full p-4 ps-10 text-lg  text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="" />
             </div>
         </div>
-        <div class="flex justify-between mb-5">
-            filters
+        <div class="flex justify-end mb-5">
+
             <Pagination :links="props.products.links"></Pagination>
         </div>
 
@@ -382,7 +402,7 @@ watch(
 
                             <button
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                @click="openEditModal(product)">ลบสินค้า</button>
+                                @click="handleDelete(product)">ลบสินค้า</button>
 
                         </td>
                     </tr>
@@ -390,14 +410,14 @@ watch(
                 </tbody>
             </table>
         </div>
-        <div class="flex justify-end">
+        <div class="flex justify-end my-5">
             <Pagination :links="props.products.links"></Pagination>
         </div>
 
         <Modal :show="ShowImg" @close="handleClose" maxWidth="6xl" closeable>
             <div class="m-3">
                 <button type="button" @click="ShowImg = false"
-                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-lg w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -415,7 +435,7 @@ watch(
                                 class="h-auto w-72 rounded-lg" />
                             <div class="m-2">
                                 <button type="button" @click="ProductImgDelete(image.ProductPic_id)"
-                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบรูป</button>
+                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-lg px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">ลบรูป</button>
                             </div>
                         </div>
                     </div>
@@ -439,7 +459,7 @@ watch(
 
             <div class="m-3">
                 <button type="button" @click="CreateModal = false"
-                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-lg w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -455,17 +475,17 @@ watch(
 
                         <div>
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รหัสสินค้า</label>
                             <input type="text" v-model="createForm.product_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="รหัสสินค้า" required />
                             <InputError class="mt-2" :message="createForm.errors.product_id" />
                         </div>
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">ชื่อสินค้า</label>
                             <input type="text" v-model="createForm.product_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="ชื่อสินค้า" required />
                             <InputError class="mt-2" :message="createForm.errors.product_name" />
                         </div>
@@ -474,9 +494,9 @@ watch(
 
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกประเภทสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกประเภทสินค้า</label>
                             <select v-model="createForm.producttype_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกประเภทสินค้า</option>
                                 <option v-for="type in productTypes" :key="type.producttype_id"
                                     :value="type.producttype_id">{{
@@ -487,9 +507,9 @@ watch(
 
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกแบรนด์สินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกแบรนด์สินค้า</label>
                             <select v-model="createForm.brand_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกแบรนด์สินค้า</option>
                                 <option v-for="brand in productBrands" :key="brand.brand_id" :value="brand.brand_id">{{
                                     brand.brand_name }}</option>
@@ -499,9 +519,9 @@ watch(
 
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกกลุ่มสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกกลุ่มสินค้า</label>
                             <select v-model="createForm.group_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกกลุ่มสินค้า</option>
                                 <option v-for="group in productGroups" :key="group.group_id" :value="group.group_id">{{
                                     group.group_name }}</option>
@@ -510,9 +530,9 @@ watch(
                         </div>
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกชนิดสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกชนิดสินค้า</label>
                             <select v-model="createForm.kind_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกชนิดสินค้า</option>
                                 <option v-for="kind in productKinds" :key="kind.kind_id" :value="kind.kind_id">{{
                                     kind.kind_name }}</option>
@@ -522,35 +542,35 @@ watch(
                     </div>
                     <div>
                         <label
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า</label>
+                            class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า</label>
                         <textarea id="message" rows="4" v-model="createForm.product_desc"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า" required></textarea>
                         <InputError class="mt-2" :message="createForm.errors.product_desc" />
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
+                        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
                             (เพิ่มเติม)</label>
                         <textarea id="message" rows="4" v-model="createForm.product_desc0"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า (เพิ่มเติม)"></textarea>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
+                        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
                             (เพิ่มเติม)</label>
                         <textarea id="message" rows="4" v-model="createForm.product_desc1"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า (เพิ่มเติม)"></textarea>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ราคาสินค้า</label>
+                        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">ราคาสินค้า</label>
                         <input type="number" v-model="createForm.product_price"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="ราคาสินค้า" required min=0 />
                         <InputError class="mt-2" :message="createForm.errors.product_price" />
                     </div>
                     <button type="submit"
-                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create
                         Product</button>
                 </form>
             </div>
@@ -564,7 +584,7 @@ watch(
 
             <div class="m-3">
                 <button type="button" @click="EditModal = false"
-                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-lg w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -580,17 +600,17 @@ watch(
 
                         <div>
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รหัสสินค้า</label>
                             <input type="text" v-model="editForm.product_id_edit"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="รหัสสินค้า" required disabled />
 
                         </div>
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">ชื่อสินค้า</label>
                             <input type="text" v-model="editForm.product_name_edit"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="ชื่อสินค้า" required />
                             <InputError class="mt-2" :message="editForm.errors.product_name_edit" />
                         </div>
@@ -599,9 +619,9 @@ watch(
 
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกประเภทสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกประเภทสินค้า</label>
                             <select id="productTypeSelect" v-model="editForm.producttype_id_edit"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกประเภทสินค้า</option>
                                 <option v-for="type in productTypes" :key="type.producttype_id"
                                     :value="type.producttype_id">{{
@@ -612,9 +632,9 @@ watch(
 
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกแบรนด์สินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกแบรนด์สินค้า</label>
                             <select id="brand_id" v-model="editForm.brand_id_edit"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกแบรนด์สินค้า</option>
                                 <option v-for="brand in productBrands" :key="brand.brand_id" :value="brand.brand_id">{{
                                     brand.brand_name }}</option>
@@ -624,9 +644,9 @@ watch(
 
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกกลุ่มสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกกลุ่มสินค้า</label>
                             <select id="group_id" v-model="editForm.group_id_edit"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกกลุ่มสินค้า</option>
                                 <option v-for="group in productGroups" :key="group.group_id" :value="group.group_id">{{
                                     group.group_name }}</option>
@@ -635,9 +655,9 @@ watch(
                         </div>
                         <div class="w-full mx-2">
                             <label
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">เลือกชนิดสินค้า</label>
+                                class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">เลือกชนิดสินค้า</label>
                             <select id="kind_id" v-model="editForm.kind_id_edit"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected disabled>เลือกชนิดสินค้า</option>
                                 <option v-for="kind in productKinds" :key="kind.kind_id" :value="kind.kind_id">{{
                                     kind.kind_name }}</option>
@@ -647,30 +667,30 @@ watch(
                     </div>
                     <div>
                         <label
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า</label>
+                            class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า</label>
                         <textarea id="message" rows="4" v-model="editForm.product_desc_edit"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า"></textarea>
                         <InputError class="mt-2" :message="editForm.errors.product_desc_edit" />
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
+                        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
                             (เพิ่มเติม)</label>
                         <textarea id="message" rows="4" v-model="editForm.product_desc0_edit"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า (เพิ่มเติม)"></textarea>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
+                        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">รายละเอียดสินค้า
                             (เพิ่มเติม)</label>
                         <textarea id="message" rows="4" v-model="editForm.product_desc1_edit"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="รายละเอียดสินค้า (เพิ่มเติม)"></textarea>
                     </div>
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ราคาสินค้า</label>
+                        <label class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">ราคาสินค้า</label>
                         <input type="number" id="product_price" v-model="editForm.product_price_edit"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Product Price" required min=0 />
                         <InputError class="mt-2" :message="editForm.errors.product_price_edit" />
                     </div>
