@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 
 use App\Models\ProductPictures;
+use App\Models\TbUser;
 
 class AdminController extends Controller
 {
@@ -508,7 +509,7 @@ class AdminController extends Controller
     public function userAdmin(Request $request)
     {
 
-        $adminUsers = User::role('admin')->get();
+        $adminUsers = TbUser::role('admin')->get();
 
 
         return Inertia::render('Admin/User', [
@@ -533,7 +534,7 @@ class AdminController extends Controller
 
         ]);
 
-        $admin = new User;
+        $admin = new TbUser;
         $admin->username = $request->username;
         $admin->firstname = $request->firstname;
         $admin->lastname = $request->lastname;
@@ -548,7 +549,7 @@ class AdminController extends Controller
     public function userAdminDelete(Request $request)
     {
 
-        $admin = User::findOrFail($request->id);
+        $admin = TbUser::findOrFail($request->id);
         $admin->delete();
 
 

@@ -2,17 +2,23 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use LaravelAndVueJS\Traits\LaravelPermissionToVueJS;
-class User extends Authenticatable
+use Laravel\Sanctum\HasApiTokens;
+
+class TbUser extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles,HasApiTokens;
     use LaravelPermissionToVueJS;
+
+
+    protected $table = 'tbuser';
+    protected $guard_name = 'web';
     /**
      * The attributes that are mass assignable.
      *
@@ -20,8 +26,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
+        'firstname',
+        'lastname',
         'email',
         'password',
+        'last_login',
+        'last_logout',
+        
     ];
 
     /**

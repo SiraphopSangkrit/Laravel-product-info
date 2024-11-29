@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\TbUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
-
+use Carbon\Carbon;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -33,6 +34,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $request->user()->update([
+            'last_login' => Carbon::now()->toDateTimeString(),
+            'last_login_ip' => $request->ip()
+        ]);
+
         return redirect()->intended(route('admin.dashboard', absolute: false));
     }
 
@@ -41,6 +47,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $request->user()->update([
+            'last_logout' => Carbon::now()->toDateTimeString(),
+        ]);
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
