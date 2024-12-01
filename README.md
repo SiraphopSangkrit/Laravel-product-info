@@ -28,7 +28,7 @@ npm install
 php artisan key:generate
 
 # Migrate database
-php artisan migrate
+php artisan migrate --seed
 
 
 # Run the server
