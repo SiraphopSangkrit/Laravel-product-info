@@ -34,13 +34,13 @@ const setMainImage = (url) => {
 
         <div>
             <div class="flex justify-center">
-                <div class="min-h-screen w-full">
+                <div class=" w-full">
 
                     <div class="ml-24 mt-5 w-fit">
                         <Category>
                             <div v-for="product_type in product_types" :key="product_type.producttype_id">
                                 <Link :href="route('product.category', { id: product_type.producttype_id })">
-                                <div class="pb-4 pt-4 dark:border-gray-600 hover:bg-blue-500 rounded-lg">
+                                <div class="pb-4 pt-4 dark:border-gray-600 hover:bg-[#575a88] rounded-lg">
                                     <div class="pl-1 pr-2 text-lg font-medium ml-2 text-white dark:text-gray-200">
 
                                         {{ product_type.producttype_name }}
@@ -82,62 +82,23 @@ const setMainImage = (url) => {
 
                                         </div>
                                         <div class="flex flex-row w-fit">
-
                                             <div class="mt-8">
-                                                <h3 class="text-xl font-bold text-gray-800 w-36">แบรนด์</h3>
+                                                <h3 class="text-xl font-bold text-gray-800">แบรนด์</h3>
                                                 <div class=" ml-2 mt-4 font-normal">
                                                     {{ brand.brand_name }}
 
                                                 </div>
                                             </div>
-
-                                            <div class="mt-8">
-                                                <h3 class="text-xl font-bold text-gray-800 w-36">ประเภทสินค้า</h3>
-                                                <div class=" ml-2 mt-4 font-normal">
-                                                    {{ type.producttype_name }}
-
-                                                </div>
-                                            </div>
-                                            <div class="mt-8">
-                                                <h3 class="text-xl font-bold text-gray-800 w-36">กลุ่มสินค้า</h3>
-                                                <div class=" ml-2 mt-4 font-normal">
-                                                    {{ group.group_name }}
-
-                                                </div>
-                                            </div>
-                                            <div class="mt-8 ml-10">
-                                                <h3 class="text-xl font-bold text-gray-800 w-36">ชนิดสินค้า</h3>
-                                                <div class=" ml-2 mt-4 font-normal">
-                                                    {{ kind.kind_name }}
-
-                                                </div>
-                                            </div>
                                         </div>
-
-
                                         <div class="mt-8">
                                             <h3 class="text-xl font-bold text-gray-800">รายละเอียด</h3>
                                             <div class="ml-2 mt-4 font-normal">
                                                 <div class="mt-4 indent-8">
                                                     {{ product.product_desc }}
-
-
-                                                </div>
-                                                <div class="mt-4 indent-8">
-                                                    {{ product.product_desc0 }}
-
-
-                                                </div>
-                                                <div class="mt-4 indent-8">
-                                                    {{ product.product_desc1 }}
-
-
                                                 </div>
                                             </div>
 
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>

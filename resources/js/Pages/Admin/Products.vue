@@ -90,7 +90,6 @@ const editForm = useForm({
     group_id_edit: '',
     kind_id_edit: '',
     product_price_edit: '',
-    img_edit: []
 });
 
 const imageForm = useForm({
@@ -119,7 +118,6 @@ const AddImage = () => {
 const ProductImgDelete = ($ProductPicId) => {
     router.delete(route('admin.deleteProductPics', $ProductPicId), {
         onSuccess: () => {
-            handleClose();
             Toast.fire({
                 icon: "success",
                 title: "ลบรูปสินค้าสำเร็จ"
@@ -133,9 +131,7 @@ const ProductImgDelete = ($ProductPicId) => {
             });
         }
     });
-
 }
-
 const ProductCreate = () => {
     createForm.post(route('admin.productCreate'), {
         onSuccess: () => {

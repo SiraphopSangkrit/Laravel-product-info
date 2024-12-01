@@ -1,9 +1,9 @@
 <template>
     <div class="relative">
-        <div class="bg-blue-600 rounded-md px-2 py-2  text-white text-xl">
+        <div class="bg-[#333552] rounded-md px-2 py-2  text-white text-xl">
             <div class="flex items-center">
                 <button @click="showingNavigationDropdown = !showingNavigationDropdown"
-                    class="inline-flex items-center  rounded-md p-2 text-white transition duration-150 ease-in-out hover:bg-blue-500 focus:bg-blue-500 focus:text-white focus:outline-none">
+                    class="inline-flex items-center  rounded-md p-2 text-white transition duration-150 ease-in-out hover:bg-[#575a88] focus:bg-[#575a88] focus:text-white focus:outline-none">
                     หมวดหมู่สินค้า
                     <svg class="h-6 w-6 ml-11" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{
@@ -24,7 +24,7 @@
             </div>
 
             <div v-show="showingNavigationDropdown"
-                class="absolute z-20 left-0  w-80 bg-blue-600 rounded-md shadow-lg" style="display: none"
+                class="absolute z-20 left-0  w-80 bg-[#333552] rounded-md shadow-lg" style="display: none"
                 @click="showingNavigationDropdown = false">
 
                 <slot />

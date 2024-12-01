@@ -7,21 +7,22 @@ import { Link } from '@inertiajs/vue3';
 <template>
     <div>
         <div class="min-h-screen bg-white">
-            <div class="min-w-full bg-gray-100">
-                <div class="flex justify-end mx-auto px-6 sm:px-8 lg:px-10 text-black">
-                    <Link :href="route('admin.dashboard')">
-                    admin login
-                    </Link>
-                </div>
+            <div class="min-w-full bg-[#333552]">
 
+
+                <div class="flex justify-end mr-2">
+                    <Link :href="route('admin.dashboard')" class="text-white text-sm">
+                    สำหรับผู้ดูแล
+                    </Link>
+
+                </div>
             </div>
-            <header class="bg-white shadow dark:bg-gray-800 py-5" v-if="$slots.header" >
-                <div class="mx-auto max-w-7xl ">
+            <header class="bg-[#333552] shadow dark:bg-gray-800 py-5" v-if="$slots.header">
+                <div class="mx-auto">
                     <div class="flex items-center">
                         <Link :href="route('product.index')">
-                        <div>
-                            <h1 class="text-3xl font-semibold">TPPS</h1>
-
+                        <div class="mx-10">
+                            <ApplicationLogo />
                         </div>
                         </Link>
                         <slot name="header" />
@@ -31,7 +32,7 @@ import { Link } from '@inertiajs/vue3';
             </header>
 
             <div class="flex justify-center">
-                <div class="min-h-screen w-full">
+                <div class=" max-h-max w-full">
                     <main>
                         <slot />
                     </main>
@@ -40,6 +41,8 @@ import { Link } from '@inertiajs/vue3';
 
             </div>
         </div>
+        <Footer>
 
+        </Footer>
     </div>
 </template>

@@ -31,7 +31,7 @@ const props = defineProps(['news', 'product_types']);
                                 <Category>
                                     <div v-for="product_type in product_types" :key="product_type.producttype_id">
                                         <Link :href="route('product.category', { id: product_type.producttype_id })">
-                                        <div class="pb-4 pt-4 dark:border-gray-600 hover:bg-blue-500 rounded-lg">
+                                        <div class="pb-4 pt-4 dark:border-gray-600 hover:bg-[#575a88] rounded-lg">
                                             <div
                                                 class="pl-1 pr-2 text-lg font-medium ml-2 text-white dark:text-gray-200">
 

@@ -33,7 +33,6 @@ const goToProduct = (result) => {
 
 </script>
 <template>
-
     <div class="relative w-2/3 z-40">
         <input type="text" id="default-input" v-model="searchQuery"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

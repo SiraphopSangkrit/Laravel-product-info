@@ -39,7 +39,7 @@ class AdminController extends Controller
                     ->orWhereHas('kinds', fn($q) => $q->where('kind_name', 'LIKE', "%{$search}%"))
                     ->orWhereHas('types', fn($q) => $q->where('producttype_name', 'LIKE', "%{$search}%"));
             })
-            ->orderBy('product_id', 'desc')
+            ->orderBy('product_id', 'asc')
             ->paginate(36)->withQueryString();
 
 
@@ -377,7 +377,7 @@ class AdminController extends Controller
     {
 
         $kindId =  $request->kind_id;
-        $kind = Kind::find();
+        $kind = Kind::find($kindId);
         $kind->kind_name = $request->kind_name;
         $kind->save();
 
@@ -392,7 +392,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function Banner(Request $request)
+    public function Banner()
     {
         $banners = Banners::orderBy('created_at')->paginate(10);
 
@@ -510,8 +510,6 @@ class AdminController extends Controller
     {
 
         $adminUsers = TbUser::role('admin')->get();
-
-
         return Inertia::render('Admin/User', [
             'adminUsers' => $adminUsers
         ]);
