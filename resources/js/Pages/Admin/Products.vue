@@ -118,6 +118,7 @@ const AddImage = () => {
 const ProductImgDelete = ($ProductPicId) => {
     router.delete(route('admin.deleteProductPics', $ProductPicId), {
         onSuccess: () => {
+            handleClose();
             Toast.fire({
                 icon: "success",
                 title: "ลบรูปสินค้าสำเร็จ"

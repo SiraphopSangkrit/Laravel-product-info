@@ -149,15 +149,17 @@ class AdminController extends Controller
         $product_id = $request->product_id;
 
         $images = $request->file('image');
-
-        foreach ($images as $image) {
-            $product_pic = new ProductPictures;
-            $product_pic->product_id = $product_id;
-            $picture_path = $image->store('products_image', 'public');
-            $product_pic->asset_url = $picture_path;
-            $product_pic->public_url = $picture_path;
-            $product_pic->save();
+        if ($images) {
+            foreach ($images as $image) {
+                $product_pic = new ProductPictures;
+                $product_pic->product_id = $product_id;
+                $picture_path = $image->store('products_image', 'public');
+                $product_pic->asset_url = $picture_path;
+                $product_pic->public_url = $picture_path;
+                $product_pic->save();
+            }
         }
+
         return redirect()->back();
     }
 
@@ -443,7 +445,7 @@ class AdminController extends Controller
             ->orderBy('news_id', 'asc')
             ->paginate(10)->withQueryString();
 
-        return Inertia::render('Admin/News', ['News' => $news,'search' =>$search]);
+        return Inertia::render('Admin/News', ['News' => $news, 'search' => $search]);
     }
 
     public function NewsCreate(Request $request)
@@ -466,14 +468,15 @@ class AdminController extends Controller
         $news_id = $request->news_id;
 
         $images = $request->file('image');
-
-        foreach ($images as $image) {
-            $newsPic = new NewsPics;
-            $newsPic->news_id = $news_id;
-            $picture_path = $image->store('news_image', 'public');
-            $newsPic->asset_url = $picture_path;
-            $newsPic->public_url = $picture_path;
-            $newsPic->save();
+        if ($images) {
+            foreach ($images as $image) {
+                $newsPic = new NewsPics;
+                $newsPic->news_id = $news_id;
+                $picture_path = $image->store('news_image', 'public');
+                $newsPic->asset_url = $picture_path;
+                $newsPic->public_url = $picture_path;
+                $newsPic->save();
+            }
         }
         return redirect()->back();
     }
