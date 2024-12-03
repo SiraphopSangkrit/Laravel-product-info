@@ -3,7 +3,6 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import Modal from '@/Components/Modal.vue';
-import Pagination from '@/Components/Pagination.vue';
 import { router } from '@inertiajs/vue3';
 import Swal from 'sweetalert2'
 import { Head } from '@inertiajs/vue3';
@@ -12,7 +11,7 @@ import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-
+import InputError from '@/Components/InputError.vue';
 
 const FilePond = vueFilePond(
     FilePondPluginFileValidateType,
@@ -34,6 +33,9 @@ const openCreateModal = () => {
 
 const handleClose = () => {
     CreateModal.value = false;
+    form.reset();
+    form.clearErrors();
+
 };
 
 
@@ -41,6 +43,8 @@ const BannerCreate = () => {
     form.post(route('admin.banner.create'), {
         onSuccess: () => {
             handleClose();
+            form.reset();
+
             Toast.fire({
                 icon: "success",
                 title: "เพิ่มแบนเนอร์สำเร็จ"
@@ -203,9 +207,9 @@ console.log(props.banners)
                     <file-pond name="image" ref="pond" label-idle="Drop files here..."
                         accepted-file-types="image/jpeg, image/png" @change="form.image = $event.target.files[0]"
                         @init="handleFilePondInit" />
-
+                        <InputError class="my-2" :message="form.errors.image" />
                     <button type="submit"
-                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มแบนเนอร์</button>
+                        class="mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มแบนเนอร์</button>
                 </form>
             </div>
         </Modal>

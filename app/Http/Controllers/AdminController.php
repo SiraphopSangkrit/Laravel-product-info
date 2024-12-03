@@ -145,6 +145,12 @@ class AdminController extends Controller
 
     public function addProductPictures(Request $request)
     {
+        $request->validate([
+            'image' => 'required'
+        ], [
+
+            'image.required' => 'กรุณาใส่รูปสินค้า.',
+        ]);
 
         $product_id = $request->product_id;
 
@@ -411,6 +417,15 @@ class AdminController extends Controller
 
     public function bannerAdd(Request $request)
     {
+
+        $request->validate([
+            'image' => 'required'
+        ], [
+
+            'image.required' => 'กรุณาใส่รูป.',
+        ]);
+
+
         $images = $request->file('image');
         $banner = new Banners;
         $picture_path = $images->store('banner_image', 'public');
@@ -465,6 +480,15 @@ class AdminController extends Controller
 
     public function addNewsPictures(Request $request)
     {
+
+        $request->validate([
+            'image' => 'required'
+        ], [
+
+            'image.required' => 'กรุณาใส่รูป.',
+        ]);
+
+
         $news_id = $request->news_id;
 
         $images = $request->file('image');

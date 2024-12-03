@@ -12,14 +12,10 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import debounce from 'lodash/debounce';
-
-
 const FilePond = vueFilePond(
     FilePondPluginFileValidateType,
     FilePondPluginImagePreview
 );
-
-
 
 const CreateModal = ref(false);
 const EditModal = ref(false);
@@ -31,22 +27,24 @@ const openCreateModal = () => {
     CreateModal.value = true;
 };
 
-
-
 const handleClose = () => {
     CreateModal.value = false;
     EditModal.value = false;
     ShowImg.value = false;
     currentImage.value = '';
+    imageForm.reset();
+    imageForm.clearErrors();
+    createForm.clearErrors();
+    editForm.clearErrors();
 };
 
 
 const openImgModal = (product) => {
 
-
     currentImage.value = product.product_pics;
     imageForm.product_id = product.product_id;
     ShowImg.value = true;
+
 };
 
 
@@ -102,6 +100,7 @@ const AddImage = () => {
         {
             onSuccess: () => {
                 handleClose();
+                imageForm.reset();
                 Toast.fire({
                     icon: "success",
                     title: "เพิ่มรูปสินค้าสำเร็จ"
@@ -137,6 +136,7 @@ const ProductCreate = () => {
     createForm.post(route('admin.productCreate'), {
         onSuccess: () => {
             handleClose();
+            createForm.reset();
             Toast.fire({
                 icon: "success",
                 title: "เพิ่มข้อมูลสินค้าสำเร็จ"
@@ -157,6 +157,7 @@ const ProductUpdate = () => {
     editForm.put(route('admin.updateProduct', { id: editForm.product_id_edit }), {
         onSuccess: () => {
             handleClose();
+
             Toast.fire({
                 icon: "success",
                 title: "อัพเดตข้อมูลสินค้าสำเร็จ"
@@ -444,8 +445,10 @@ watch(
                             accepted-file-types="image/jpeg, image/png" @change="imageForm.image = $event.target.files"
                             @init="handleFilePondInit" />
 
+                            <InputError class="my-2" :message="imageForm.errors.image" />
+
                         <button type="submit"
-                            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มรูปสินค้า</button>
+                            class="mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มรูปสินค้า</button>
                     </form>
                 </div>
             </div>

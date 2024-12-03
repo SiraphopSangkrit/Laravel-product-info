@@ -10,7 +10,7 @@ import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-
+import InputError from '@/Components/InputError.vue';
 const FilePond = vueFilePond(
     FilePondPluginFileValidateType,
     FilePondPluginImagePreview
@@ -360,9 +360,9 @@ watch(
                         <file-pond name="image" ref="pond" label-idle="Drop files here..." v-bind:allow-multiple="true"
                             accepted-file-types="image/jpeg, image/png" @change="imageForm.image = $event.target.files"
                             @init="handleFilePondInit" />
-
+                            <InputError class="my-2" :message="imageForm.errors.image" />
                         <button type="submit"
-                            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มรูปสินค้า</button>
+                            class="mt-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">เพิ่มรูปสินค้า</button>
                     </form>
                 </div>
             </div>
