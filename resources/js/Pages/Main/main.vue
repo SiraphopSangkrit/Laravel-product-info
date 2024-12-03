@@ -2,7 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SearchInput from '@/Components/SearchInput.vue';
 import { ref } from 'vue';
-import { Link, Head } from '@inertiajs/vue3';
+import { Link} from '@inertiajs/vue3';
 import Category from '@/Components/Category.vue';
 
 const props = defineProps(['product_types', 'banners', 'news', 'products']);
@@ -15,8 +15,6 @@ const showingNavigationDropdown = ref(false);
 </script>
 <template>
     <AppLayout>
-
-        <Head title="TPPS" />
         <template #header>
             <div class="flex w-full justify-center">
                 <SearchInput></SearchInput>

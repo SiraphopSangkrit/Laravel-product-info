@@ -10,9 +10,9 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 
 import "flowbite";
 
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const appName = 'บริษัท ไทยพิพัฒน์โซลูชั่น จำกัด';
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${appName}`,
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,
