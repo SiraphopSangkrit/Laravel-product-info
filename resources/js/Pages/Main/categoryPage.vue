@@ -230,7 +230,7 @@ const goToProduct = (result) => {
                             <section aria-labelledby="products-heading" class="pb-3 pt-6">
                                 <h2 id="products-heading" class="sr-only">Products</h2>
                                 <div class="flex flex-row">
-                                    <div class="hidden lg:block w-64">
+                                    <div class="hidden lg:block w-72">
                                         <Category>
                                             <div v-for="product_type in product_types"
                                                 :key="product_type.producttype_id">
@@ -239,7 +239,6 @@ const goToProduct = (result) => {
                                                 <div class="pb-4 pt-4 dark:border-gray-600 hover:bg-[#575a88] rounded-lg">
                                                     <div
                                                         class="pl-1 pr-2 text-lg font-medium ml-2 text-white dark:text-gray-200">
-
                                                         {{ product_type.producttype_name }}
                                                     </div>
                                                 </div>
