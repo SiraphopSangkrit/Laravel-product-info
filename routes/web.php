@@ -21,6 +21,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
+    Route::get('/admin/products/{id}/images', [AdminController::class, 'getProductImages'])->name('admin.getProductImages');
     Route::post('/admin/products/{id}/addPics', [AdminController::class, 'addProductPictures'])->name('admin.addProductPics');
     Route::delete('/admin/products/delete/image/{id}', [AdminController::class, 'deleteProductPictures'])->name('admin.deleteProductPics');
     Route::post('/admin/products/create', [AdminController::class, 'createProduct'])->name('admin.productCreate');

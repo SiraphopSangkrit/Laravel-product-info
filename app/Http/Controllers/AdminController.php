@@ -143,7 +143,16 @@ class AdminController extends Controller
 
 
 
-    public function addProductPictures(Request $request)
+    public function getProductImages($id){
+        $product = Products::with('productPics')->find($id);
+        if($product){
+            return response()->json($product->productPics);
+        }
+        return response()->json([]);
+    }
+
+
+    public function addProductPictures(Request $request, $id)
     {
         $request->validate([
             'image' => 'required'
@@ -152,19 +161,16 @@ class AdminController extends Controller
             'image.required' => 'กรุณาใส่รูปสินค้า.',
         ]);
 
-        $product_id = $request->product_id;
-
-        $images = $request->file('image');
-
-        foreach ($images as $image) {
-            $product_pic = new ProductPictures;
-            $product_pic->product_id = $product_id;
-            $picture_path = $image->store('products_image', 'public');
-            $product_pic->asset_url = $picture_path;
-            $product_pic->public_url = $picture_path;
-            $product_pic->save();
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
+                $product_pic = new ProductPictures;
+                $product_pic->product_id = $id;
+                $picture_path = $image->store('products_image', 'public');
+                $product_pic->asset_url = $picture_path;
+                $product_pic->public_url = $picture_path;
+                $product_pic->save();
+            }
         }
-
 
         return redirect()->back();
     }
